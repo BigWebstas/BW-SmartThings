@@ -8,7 +8,7 @@ preferences {
     input("ip", "text", title: "IP", description: "The IP of your alarmserver")
     input("port", "text", title: "Port", description: "The port")
     input("pincode", "text", title: "Pincode", description: "Alarm Pincode")
-    input "smartMonitorInt", "enum", title: "Integrate w/ Smart Monitor?", options: ["Yes", "No"], required: true
+    //input "smartMonitorInt", "enum", title: "Integrate w/ Smart Monitor?", options: ["Yes", "No"], required: true
 	} 
 // for the UI
 metadata {
@@ -51,7 +51,7 @@ metadata {
 			state "stayarm", label: 'Arm - Stay', action: "stayarm", icon: "st.Home.home4", backgroundColor: "#008CC1"
        }
 
-		main (["dscpartition", "arm", "stayarm", "staybutton", "disarm"])	
+		main (["dscpartition"])	
 		details(["dscpartition", "arm", "stayarm", "staybutton", "disarm"])
   }
 }
@@ -108,7 +108,6 @@ def arm() {
     return result
 }
 
-
 def on() {
     def result = new physicalgraph.device.HubAction(
         method: "GET",
@@ -139,8 +138,6 @@ def off() {
     return result
 }
 
-
-
 def disarm() {
     def result = new physicalgraph.device.HubAction(
         method: "GET",
@@ -156,51 +153,8 @@ def disarm() {
     return result
 }
 
-def initialize() {
-	log.debug "Version 1.3"
-    log.debug smartMonitorInt.value[0]
-    if(smartMonitorInt.value[0] != "N")
-    {
-    	subscribe(location, "alarmSystemStatus", alarmStatusUpdate)
-    }
-	subscribe(thecommand, "switch", switchUpdate)
-}
-def switchUpdate(evt) {
-	
-    def securityMonitorMap = [
-        'armed':"stay",
-        'ready':"off",
-        'notready':"off",
-        'entrydelay':"off",
-    ]
-    
-    if(smartMonitorInt.value[0] != "N")
-    {
-    	sendLocationEvent(name: "alarmSystemStatus", value: securityMonitorMap."${evt.value}")
-    }
-	callAlarmServer(evt, eventMap)
-}
-
-def alarmStatusUpdate(evt) {
-
-    def securityMonitorMap = [
-        'armed':"stay",
-        'ready':"off",
-        'notready':"off",
-        'entrydelay':"off",
-    ]
-    
-    def command = securityMonitorMap."${evt.value}";
-    thecommand."$command"()
-	callAlarmServer(evt, eventMap)
-}
-
 def poll() {
 	log.debug "Executing 'poll'"
 	api('status' []) {
 	}
-}
-
-def api(method, args = [], success = {}) {
-
 }
