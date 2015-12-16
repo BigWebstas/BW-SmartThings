@@ -81,6 +81,7 @@ def down() {
   log.debug "Executing 'down'"
     cmd("move_forward")
 }
+//camera command interpreter
 def cmd(vars){
     log.debug "command recieved $vars"
         new physicalgraph.device.HubAction(
@@ -102,6 +103,7 @@ def parse(String description) {
     putImageInS3(descMap)
   } 
 }
+//get bits from camera and proceed 
 def take() {
   
     def hubAction = new physicalgraph.device.HubAction(
@@ -116,7 +118,7 @@ def take() {
     log.debug hubAction
     hubAction
 }
-       
+//send image to AMZS3 bucket     
 def putImageInS3(map) {
   log.debug "firing s3"
     def s3ObjectContent
@@ -144,7 +146,7 @@ def nameAndValue = param.split(":")
 map += [(nameAndValue[0].trim()):nameAndValue[1].trim()]
 }
 }
-
+//create a name for the image
 private getPictureName() {
   def pictureUuid = java.util.UUID.randomUUID().toString().replaceAll('-', '')
     log.debug pictureUuid
