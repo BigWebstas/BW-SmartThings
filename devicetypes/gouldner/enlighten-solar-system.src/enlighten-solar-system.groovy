@@ -43,12 +43,12 @@ metadata {
 
 	tiles {
             valueTile("reported_id", "device.reported_id") {
-				state ("reported_id", label: '${currentValue}\nPowered By Enphase', unit:"", backgroundColor: "#FFFFFF" 
-					   //,icon:"https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAOXAAAAJGQ3NGJiMWI0LWU5MjQtNDBhOS05NTMwLTA2MjVkMThkZThkOA.png"
+				state ("reported_id", label: '${currentValue}\nPowered By Enphase', unit:"", backgroundColor: "#010101" 
+					   //,icon:"http://edifive.com/wp-content/uploads/2015/03/icon.png"
                        )
             }
             valueTile("energy_today", "device.energy_today") {
-   	         state("energy_today", label: '${currentValue}K\nToday', icon: "http://cdn.device-icons.smartthings.com/Outdoor/outdoor3-icn@2x.png", unit:"KWh", backgroundColors: [
+   	         state("energy_today", label: '${currentValue} KWh\nToday', icon: "http://cdn.device-icons.smartthings.com/Outdoor/outdoor3-icn@2x.png", unit:"KWh", backgroundColors: [
                     [value: 2, color: "#bc2323"],
                     [value: 5, color: "#d04e00"],
                     [value: 10, color: "#f1d801"],
@@ -59,9 +59,9 @@ metadata {
     	            ]
             	)
         	}
-            valueTile("power", "device.power", width:2, height:2) {
-   	         state("Power", label: '${currentValue} Watts\n\nLive Generation', unit:"W", icon: "http://free-realestate.org/english/material/132.png", decoration: "flat",
-             foregroundColor: "#000000",
+            valueTile("power", "device.power", width:2, height:1) {
+   	         state("Power", label: '${currentValue} Watts\n\nLive Generation', unit:"W", icon: "http://www.clipartsfree.net/vector/large/1302871371_Vector_Clipart.png", backgroundColor:"#bc2323",
+             //foregroundColor: "#000000",
                 //backgroundColors:[
                 	//[value: 1, color: "#ffffff"], //black
 					//[value: 100, color: "#fb1b42"], //Bright Red 
@@ -69,6 +69,7 @@ metadata {
                 	//[value: 1200, color: "#00cc00"], //Light Green
 					//[value: 2000, color: "#79b821"] //Darker Green
 					//]
+                    
                 )
              }
             valueTile("powermain", "device.power", width:2, height:1) {
@@ -113,7 +114,7 @@ metadata {
             	)                
 			}
             valueTile("energy_life", "device.energy_life", width: 1, height: 1, canChangeIcon: true) {
-   	         state("energy_life", label: '${currentValue}M\nLife', icon: "http://cdn.device-icons.smartthings.com/Outdoor/outdoor21-icn@2x.png", unit:"MWh",
+   	         state("energy_life", label: '${currentValue} MWh\nLife', icon: "http://cdn.device-icons.smartthings.com/Outdoor/outdoor21-icn@2x.png", unit:"MWh",
               foregroundColor: "#000000",
                backgroundColors:[
                     [value: 0, color: "#bc2323"],
@@ -127,7 +128,7 @@ metadata {
             	)
         	}    
 
-            standardTile("refresh", "device.energy_today",  width: 3, height: 1, inactiveLabel: false, decoration: "flat") {
+            standardTile("refresh", "device.energy_today",  width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
                 state "default", action:"polling.poll", icon:"st.secondary.refresh"
             }
 
