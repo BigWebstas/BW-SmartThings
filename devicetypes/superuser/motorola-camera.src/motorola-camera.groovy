@@ -43,7 +43,7 @@ metadata {
 			state "take", label: "", action: "Image Capture.take", icon: "st.secondary.take", nextState:"taking"
 		} 
     standardTile("main", "main", width: 2, height: 2, canChangeIcon: false, inactiveLabel: true, canChangeBackground: false, decoration: "flat") {
-			state "Main", label: "", icon: "st.camera.camera"
+			state "Main", label: "", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png"
 		} 
 		main (["main"])	
 		details(["left", "right", "up", "down"])
