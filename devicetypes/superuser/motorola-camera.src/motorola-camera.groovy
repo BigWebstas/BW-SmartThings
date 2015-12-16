@@ -118,7 +118,7 @@ def take() {
     log.debug hubAction
     hubAction
 }
-//send image to AMZS3 bucket     
+//send image to AMZ S3 bucket     
 def putImageInS3(map) {
   log.debug "firing s3"
     def s3ObjectContent
