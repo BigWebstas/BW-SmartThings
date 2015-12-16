@@ -26,23 +26,26 @@ metadata {
     standardTile("camera", "device.image", width: 1, height: 1, canChangeIcon: false, inactiveLabel: true, canChangeBackground: false) {
 			state "default", label: "", action: "Image Capture.take", icon: "st.camera.dropcam-centered", backgroundColor: "#FFFFFF"
 		}
-    standardTile("left", "capability.momentary", width: 2, height: 2, title: "Move left", required: true, multiple: false){
-			state "move", label: 'Move Left', action: "left", backgroundColor: "#79b821"
+    standardTile("left", "capability.momentary", width: 3, height: 2, title: "Move left", required: true, multiple: false){
+			state "move", label: 'Left', action: "left", backgroundColor: "#79b821"
             def cmd = "move_left"
 		}
-    standardTile("right", "capability.momentary", width: 2, height: 2, title: "Move right", required: true, multiple: false){
-			state "right", label: 'Move right', action: "right", backgroundColor: "#79b821"
+    standardTile("right", "capability.momentary", width: 3, height: 2, title: "Move right", required: true, multiple: false){
+			state "right", label: 'right', action: "right", backgroundColor: "#79b821"
 		}
-    standardTile("up", "capability.momentary", width: 2, height: 2, title: "Move up", required: true, multiple: false){
-			state "up", label: 'Move up', action: "up", backgroundColor: "#79b821"
+    standardTile("up", "capability.momentary", width: 3, height: 2, title: "Move up", required: true, multiple: false){
+			state "up", label: 'up', action: "up", backgroundColor: "#79b821"
 		}
-    standardTile("down", "capability.momentary", width: 2, height: 2, title: "Move down", required: true, multiple: false){
-			state "down", label: 'Move down', action: "down", backgroundColor: "#79b821"
+    standardTile("down", "capability.momentary", width: 3, height: 2, title: "Move down", required: true, multiple: false){
+			state "down", label: 'down', action: "down", backgroundColor: "#79b821"
 		}
     standardTile("take", "device.image", width: 2, height: 2, canChangeIcon: false, inactiveLabel: true, canChangeBackground: false, decoration: "flat") {
 			state "take", label: "", action: "Image Capture.take", icon: "st.secondary.take", nextState:"taking"
-		}    
-		main (["left"])	
+		} 
+    standardTile("main", "main", width: 2, height: 2, canChangeIcon: false, inactiveLabel: true, canChangeBackground: false, decoration: "flat") {
+			state "Main", label: "", icon: "st.camera.camera"
+		} 
+		main (["main"])	
 		details(["left", "right", "up", "down"])
   }
 }
