@@ -487,6 +487,7 @@ def poll() {
 def refresh() {
     LOG("refresh()")
     //STATE()
+    return holdOn()
     return apiGet("/tstat")
 }
 
