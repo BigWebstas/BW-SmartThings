@@ -219,6 +219,7 @@ def parse(String description) {
     putImageInS3(descMap)
   } 
 }
+//Camera functionality provided by patrick@patrickstuart.com Thanks!
 //get bits from camera and proceed 
 def take() {
   
