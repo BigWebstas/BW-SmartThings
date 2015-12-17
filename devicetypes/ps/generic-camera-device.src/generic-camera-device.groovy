@@ -14,7 +14,7 @@
  *
  */
 metadata {
-	definition (name: "Generic Camera Device", namespace: "Webstas", author: "patrick@patrickstuart.com") {
+	definition (name: "Generic Camera Device", namespace: "PS", author: "patrick@patrickstuart.com") {
 		capability "Image Capture"
 		capability "Sensor"
 		capability "Actuator"
@@ -206,5 +206,5 @@ private getHostAddress() {
 	return ip + ":" + port
 }
 def poll() {
-	log.debug "Executing 'poll'", action: "Image Capture.take"
+	take()
 }

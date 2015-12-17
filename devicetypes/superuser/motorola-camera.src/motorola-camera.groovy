@@ -14,7 +14,20 @@ metadata {
     command "left"
     command "right"
     command "take"
-
+    command "mel1"
+    command "mel2"
+    command "mel3"
+    command "mel4"
+    command "mel5"
+    command "meloff"
+    command "reboot"
+    command "beep"
+    command "beepoff"
+    command "bup"
+    command "bdown"
+    command "cup"
+    command "cdown"
+    
   }
 
   simulator {
@@ -22,10 +35,7 @@ metadata {
 
   tiles (scale: 2){
     carouselTile("cameraDetails", "device.image", width: 6, height: 4) { }
-
-    standardTile("blank", "device.image", width: 1, height: 1, canChangeIcon: false, canChangeBackground: false, decoration: "flat") {
-      state "blank", label: "", action: "", icon: "", backgroundColor: "#FFFFFF"
-    }
+    
     standardTile("left", "capability.momentary", width: 1, height: 1, title: "Move left", required: true, multiple: false, decoration: "flat"){
       state "move", label: '', action: "left", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Left_2.png", backgroundColor: "#ffffff"
     }
@@ -38,6 +48,45 @@ metadata {
     standardTile("down", "capability.momentary", width: 1, height: 1, title: "Move down", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: '', action: "down", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Bottom_2.png", backgroundColor: "#ffffff" 
     }
+    standardTile("mel1", "capability.momentary", width: 1, height: 1, title: "mel1", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'mel1', action: "mel1", icon: "st.Electronics.electronics13", backgroundColor: "#ffffff" 
+    }
+    standardTile("mel2", "capability.momentary", width: 1, height: 1, title: "mel2", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'mel2', action: "mel2", icon: "st.Electronics.electronics13", backgroundColor: "#ffffff" 
+    }
+    standardTile("mel3", "capability.momentary", width: 1, height: 1, title: "mel3", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'mel3', action: "mel3", icon: "st.Electronics.electronics13", backgroundColor: "#ffffff" 
+    }
+    standardTile("mel4", "capability.momentary", width: 1, height: 1, title: "mel4", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'mel4', action: "mel4", icon: "st.Electronics.electronics13", backgroundColor: "#ffffff" 
+    }
+    standardTile("mel5", "capability.momentary", width: 1, height: 1, title: "mel5", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'mel5', action: "mel5", icon: "st.Electronics.electronics13", backgroundColor: "#ffffff" 
+    }
+    standardTile("meloff", "capability.momentary", width: 1, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'meloff', action: "meloff", icon: "st.Electronics.electronics13", backgroundColor: "#ffffff" 
+    }
+    standardTile("reboot", "capability.momentary", width: 2, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'reboot', action: "", icon: "", backgroundColor: "#ffffff" 
+    }
+    standardTile("beep", "capability.momentary", width: 2, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'beeep', action: "beep", icon: "", backgroundColor: "#ffffff" 
+    }
+    standardTile("beepoff", "capability.momentary", width: 2, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'beep off', action: "beepoff", icon: "", backgroundColor: "#ffffff" 
+    }    
+	standardTile("bup", "capability.momentary", width: 3, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'Brightness -', action: "bup", icon: "", backgroundColor: "#ffffff" 
+    }
+	standardTile("bdown", "capability.momentary", width: 3, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'Brightness +', action: "bdown", icon: "", backgroundColor: "#ffffff" 
+    }    
+	standardTile("cdown", "capability.momentary", width: 3, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'contrast -', action: "cdown", icon: "", backgroundColor: "#ffffff" 
+    }
+	standardTile("cup", "capability.momentary", width: 3, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
+    }    
     valueTile("temp", "device.temperature", width: 2, height: 2) {
             state "temp", label:'${currentValue}°', unit:"F", icon: "st.Weather.weather2",
                 backgroundColors:[
@@ -60,7 +109,7 @@ metadata {
       state "Main", label: "", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png"
     } 
     main (["main"]) 
-    details(["cameraDetails", "take", "temp", "left", "right", "up", "down" ])
+    details(["cameraDetails", "take", "temp", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
   }
 }
 
@@ -70,7 +119,6 @@ def left() {
 }
 def right() {
   log.debug "Executing 'right'"
-  	runIn(6, take)
     cmd("move_right")
 }
 def up() {
@@ -80,6 +128,58 @@ def up() {
 def down() {
   log.debug "Executing 'down'"
     cmd("move_forward")
+}
+def mel1() {
+  log.debug "Executing 'melody 1'"
+    cmd("melody1")
+}
+def mel2() {
+  log.debug "Executing 'melody2'"
+    cmd("melody2")
+}
+def mel3() {
+  log.debug "Executing 'melody3'"
+    cmd("melody3")
+}
+def mel4() {
+  log.debug "Executing 'melody4'"
+    cmd("melody4")
+}
+def mel5() {
+  log.debug "Executing 'melody5'"
+    cmd("melody5")
+}
+def meloff() {
+  log.debug "Executing 'melody stop'"
+    cmd("melodystop")
+}
+def reboot() {
+  log.debug "Executing 'reboot'"
+    cmd("restart_system")
+}
+def beep() {
+  log.debug "Executing 'beep on'"
+    cmd("beeper_en&setup=1000100000000000")
+}
+def beepoff() {
+  log.debug "Executing 'Beep off'"
+    cmd("beeper_dis")
+}
+def bup() {
+  log.debug "Executing 'B+'"
+    cmd("plus_brightness")
+}
+def bdown() {
+  log.debug "Executing 'B-'"
+    cmd("minus_brightness")
+}
+def cdown() {
+  log.debug "Executing 'C-'"
+    cmd("minus_contrast")
+}
+def cup() {
+  log.debug "Executing 'C+'"
+    cmd("plus_contrast")
 }
 //camera command interpreter
 def cmd(vars){
@@ -153,7 +253,7 @@ private getPictureName() {
     def picName = ip + "_$pictureUuid" + ".jpg"
   return picName
 }
-
+    
 def poll() {
   log.debug "Executing 'poll'"
   take()
