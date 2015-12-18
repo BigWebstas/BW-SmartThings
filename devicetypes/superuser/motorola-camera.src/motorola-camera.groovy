@@ -44,6 +44,7 @@ metadata {
     command "bdown"
     command "cup"
     command "cdown"
+    command "temp"
     
   }
 
@@ -126,7 +127,7 @@ metadata {
       state "Main", label: "", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png"
     } 
     main (["main"]) 
-    details(["cameraDetails", "take", "temp", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
+    details(["cameraDetails", "take", "temperature", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
   }
 }
 
@@ -246,6 +247,7 @@ if (value > 0) {
 sendEvent(name: "temperature", value: value)
 }
 }
+
 //Camera functionality provided by patrick@patrickstuart.com Thanks!
 //get bits from camera and proceed 
 def take() {
