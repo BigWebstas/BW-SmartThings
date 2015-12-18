@@ -103,9 +103,12 @@ metadata {
     }
 	standardTile("cup", "capability.momentary", width: 3, height: 1, title: "cup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
-    }    
-    valueTile("temperature", "device.temperature", width: 2, height: 2) {
-            state "temperature", label:'${currentValue}°', unit:"F", icon: "st.Weather.weather2",
+    }
+    valueTile("wifi",  "device.wifi", width: 3, height: 1, decoration: "flat"){
+    	state "default", label: 'Wifi ${currentValue}'
+    }
+    valueTile("temperature", "device.temperature", width: 2, height: 2, decoration: "flat") {
+            state "default", label:'temp ${currentValue}°', unit:"F", icon: "st.Weather.weather2",
                 backgroundColors:[
                     [value: 31, color: "#153591"],
                     [value: 44, color: "#1e9cbb"],
@@ -126,7 +129,7 @@ metadata {
       state "Main", label: "", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png"
     } 
     main (["main"]) 
-    details(["cameraDetails", "take", "temperature", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
+    details(["cameraDetails", "take", "temperature", "wifi", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
   }
 }
 
