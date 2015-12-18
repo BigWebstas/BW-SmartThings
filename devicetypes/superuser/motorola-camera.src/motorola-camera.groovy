@@ -105,7 +105,7 @@ metadata {
       state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
     }    
     valueTile("temperature", "device.temperature", width: 2, height: 2) {
-            state "temp", label:'${currentValue}°', action: "temp" unit:"F", icon: "st.Weather.weather2",
+            state "temp", label:'${currentValue}°', action: "temp", unit:"F", icon: "st.Weather.weather2",
                 backgroundColors:[
                     [value: 31, color: "#153591"],
                     [value: 44, color: "#1e9cbb"],
@@ -244,6 +244,7 @@ def updateTempTile(map) {
 def value = map.value_temperature?.isDouble() ? map.value_temperature.toDouble() : 0
 if (value > 0) {
 sendEvent(name: "temperature", value: value)
+}
 }
 //Camera functionality provided by patrick@patrickstuart.com Thanks!
 //get bits from camera and proceed 
