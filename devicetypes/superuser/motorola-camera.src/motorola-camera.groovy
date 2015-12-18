@@ -84,28 +84,28 @@ metadata {
     standardTile("meloff", "capability.momentary", width: 1, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'meloff', action: "meloff", icon: "st.Electronics.electronics13", backgroundColor: "#ffffff" 
     }
-    standardTile("reboot", "capability.momentary", width: 2, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+    standardTile("reboot", "capability.momentary", width: 2, height: 1, title: "reboot", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'reboot', action: "", icon: "", backgroundColor: "#ffffff" 
     }
-    standardTile("beep", "capability.momentary", width: 2, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+    standardTile("beep", "capability.momentary", width: 2, height: 1, title: "beep", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'beeep', action: "beep", icon: "", backgroundColor: "#ffffff" 
     }
-    standardTile("beepoff", "capability.momentary", width: 2, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+    standardTile("beepoff", "capability.momentary", width: 2, height: 1, title: "beepoff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'beep off', action: "beepoff", icon: "", backgroundColor: "#ffffff" 
     }    
-	standardTile("bup", "capability.momentary", width: 3, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+	standardTile("bup", "capability.momentary", width: 3, height: 1, title: "bup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Brightness -', action: "bup", icon: "", backgroundColor: "#ffffff" 
     }
-	standardTile("bdown", "capability.momentary", width: 3, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+	standardTile("bdown", "capability.momentary", width: 3, height: 1, title: "bdown", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Brightness +', action: "bdown", icon: "", backgroundColor: "#ffffff" 
     }    
-	standardTile("cdown", "capability.momentary", width: 3, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+	standardTile("cdown", "capability.momentary", width: 3, height: 1, title: "cdown", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'contrast -', action: "cdown", icon: "", backgroundColor: "#ffffff" 
     }
-    standardTile("poll", "capability.momentary", width: 6, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+    standardTile("poll", "capability.momentary", width: 6, height: 1, title: "poll", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Poll', action: "poll", icon: "", backgroundColor: "#ffffff" 
     } 
-	standardTile("cup", "capability.momentary", width: 3, height: 1, title: "meloff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+	standardTile("cup", "capability.momentary", width: 3, height: 1, title: "cup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
     }    
     valueTile("temperature", "device.temperature", width: 2, height: 2) {
@@ -134,10 +134,6 @@ metadata {
   }
 }
 
-def temp() {
-  log.debug "Executing 'temp'"
-    cmd("value_temperature")
-}
 def left() {
   log.debug "Executing 'left'"
     cmd("move_left")
