@@ -105,10 +105,10 @@ metadata {
       state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
     }
     valueTile("wifi",  "device.wifi", width: 3, height: 1, decoration: "flat"){
-    	state "default", label: 'Wifi ${currentValue}'
+    	state "default", label: '${currentValue}', unit:"%"
     }
     valueTile("temperature", "device.temperature", width: 2, height: 2, decoration: "flat") {
-            state "default", label:'temp ${currentValue}°', unit:"F", icon: "st.Weather.weather2",
+            state "default", label:'${currentValue}°', unit:"F",
                 backgroundColors:[
                     [value: 31, color: "#153591"],
                     [value: 44, color: "#1e9cbb"],
