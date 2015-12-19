@@ -25,6 +25,7 @@ metadata {
     capability "Actuator"
     capability "Polling"
     capability "Temperature Measurement"
+    capability "Signal Strength"
 
     command "up"
     command "down"
@@ -104,9 +105,9 @@ metadata {
 	standardTile("cup", "capability.momentary", width: 3, height: 1, title: "cup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
     }
-    valueTile("refresh",  "refresh", width: 2, height: 1, decoration: "flat"){
-    	state "default", label: "refresh", action: "poll"
-    }
+    valueTile("lqi", "device.lqi", width: 2, height: 1, decoration: "flat", inactiveLabel: false) {
+			state "lqi", label:'Wifi ${currentValue}%', unit:""
+        }
     valueTile("temperature", "device.temperature", width: 2, height: 1, decoration: "flat") {
             state "temp", label:'Temp ${currentValue}°', unit:"F", icon: "", backgroundColor: "#ffffff"
         }
@@ -120,7 +121,7 @@ metadata {
             state "temp", label:'${currentValue}°', unit:"F", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png", backgroundColor: "#ffffff"
         }
     main (["main"]) 
-    details(["cameraDetails", "take", "temperature", "refresh", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
+    details(["cameraDetails", "take", "temperature", "lqi", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
   }
 }
 
@@ -206,9 +207,17 @@ def parse(String description) {
 
     def header = new String(map.headers.decodeBase64())
     def body = new String(map.body.decodeBase64())
-	body = body.replaceAll("[^\\d.]", "");
-    body = body(body * 1.8 + 32)
-    sendEvent(name: "temperature", value: body)
+        
+//sendEvent(name: "rssi", value: body)
+
+    if( body.contains('value_temperature')) {
+		body = body.replaceAll("[^\\d.]", "")
+        sendEvent(name: "temperature", value: body)
+    }
+    else(body.contains('get_wifi_strength')) {
+    	body = body.replaceAll("[^\\d.]", "")
+        sendEvent(name: "lqi", value: body)
+    }
   }
   
 }
@@ -223,20 +232,6 @@ def cmd(vars){
             HOST: "$ip:80"
         ]
     )
-}
-
-def updateWifiTile(map) {
-def value = map.get_Wifi_Strength?.isInteger() ? map.get_Wifi_Strength.toInteger() : 0
-if (value > 0) {
-sendEvent(name: "wifi", value: value)
-}
-}
-
-def updateTempTile(map) {
-def value = map.value_temperature?.isDouble() ? map.value_temperature.toDouble() : 0
-if (value > 0) {
-sendEvent(name: "temperature", value: value)
-}
 }
 
 //Camera functionality provided by patrick@patrickstuart.com Thanks!
@@ -301,6 +296,6 @@ def poll() {
 	def cmds = []
 	cmds << take()
 	cmds << cmd("value_temperature")
-	//cmds << cmd("get_wifi_strength")
+	cmds << cmd("get_wifi_strength")
 	cmds
 }
