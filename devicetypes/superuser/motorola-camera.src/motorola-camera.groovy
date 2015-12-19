@@ -104,20 +104,11 @@ metadata {
 	standardTile("cup", "capability.momentary", width: 3, height: 1, title: "cup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
     }
-    valueTile("wifi",  "device.wifi", width: 3, height: 1, decoration: "flat"){
-    	state "default", label: '${currentValue}', unit:"%"
+    valueTile("refresh",  "refresh", width: 2, height: 1, decoration: "flat"){
+    	state "default", label: "refresh", action: "poll"
     }
-    valueTile("temperature", "device.temperature", width: 2, height: 2, decoration: "flat") {
-            state "default", label:'${currentValue}°', unit:"F",
-                backgroundColors:[
-                    [value: 31, color: "#153591"],
-                    [value: 44, color: "#1e9cbb"],
-                    [value: 59, color: "#90d2a7"],
-                    [value: 74, color: "#44b621"],
-                    [value: 84, color: "#f1d801"],
-                    [value: 95, color: "#d04e00"],
-                    [value: 96, color: "#bc2323"]
-                ]
+    valueTile("temperature", "device.temperature", width: 2, height: 1, decoration: "flat") {
+            state "temp", label:'Temp ${currentValue}°', unit:"F", icon: "", backgroundColor: "#ffffff"
         }
     standardTile("take", "device.image", width: 2, height: 2, canChangeIcon: false, inactiveLabel: true, canChangeBackground: false) {
       state "take", label: "Take", action: "Image Capture.take", icon: "st.camera.camera", backgroundColor: "#FFFFFF", nextState:"taking"
@@ -125,11 +116,11 @@ metadata {
       state "image", label: "Take", action: "Image Capture.take", icon: "st.camera.camera", backgroundColor: "#FFFFFF", nextState:"taking"
     }
  
-    standardTile("main", "main", width: 2, height: 2, canChangeIcon: false, inactiveLabel: true, canChangeBackground: false, decoration: "flat") {
-      state "Main", label: "", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png"
-    } 
+    valueTile("main", "device.temperature", width: 2, height: 2, decoration: "flat") {
+            state "temp", label:'${currentValue}°', unit:"F", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png", backgroundColor: "#ffffff"
+        }
     main (["main"]) 
-    details(["cameraDetails", "take", "temperature", "wifi", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
+    details(["cameraDetails", "take", "temperature", "refresh", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
   }
 }
 
@@ -204,7 +195,7 @@ def cup() {
 
 //parser
 def parse(String description) {
-  log.debug("Parsing '${description}'")
+  log.debug("Parsediddlyarsing '${description}'")
 
   def map = stringToMap(description)
 
@@ -213,11 +204,13 @@ def parse(String description) {
   }
   else{
 
-    def headerString = new String(map.headers.decodeBase64())
-    def bodyString = new String(map.body.decodeBase64())
-
-    sendEvent(name: "temperature", value: bodyString, unit: "F")
+    def header = new String(map.headers.decodeBase64())
+    def body = new String(map.body.decodeBase64())
+	body = body.replaceAll("[^\\d.]", "");
+    body = body(body * 1.8 + 32)
+    sendEvent(name: "temperature", value: body)
   }
+  
 }
 
 //camera command interpreter
@@ -308,6 +301,6 @@ def poll() {
 	def cmds = []
 	cmds << take()
 	cmds << cmd("value_temperature")
-	cmds << cmd("get_wifi_strength")
+	//cmds << cmd("get_wifi_strength")
 	cmds
 }
