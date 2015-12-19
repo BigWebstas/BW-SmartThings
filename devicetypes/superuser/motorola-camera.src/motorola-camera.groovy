@@ -93,10 +93,10 @@ metadata {
     standardTile("beepoff", "capability.momentary", width: 2, height: 1, title: "beepoff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'beep off', action: "beepoff", icon: "", backgroundColor: "#ffffff" 
     }    
-	standardTile("bup", "capability.momentary", width: 3, height: 1, title: "bup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+	standardTile("bup", "capability.momentary", width: 2, height: 1, title: "bup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Brightness -', action: "bup", icon: "", backgroundColor: "#ffffff" 
     }
-	standardTile("bdown", "capability.momentary", width: 3, height: 1, title: "bdown", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+	standardTile("bdown", "capability.momentary", width: 2, height: 1, title: "bdown", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Brightness +', action: "bdown", icon: "", backgroundColor: "#ffffff" 
     }    
 	standardTile("cdown", "capability.momentary", width: 3, height: 1, title: "cdown", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
@@ -104,6 +104,9 @@ metadata {
     }
 	standardTile("cup", "capability.momentary", width: 3, height: 1, title: "cup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
+    }
+    standardTile("refresh", "refresh", width: 2, height: 1, title: "refresh", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: 'refresh', action: "poll", icon: "", backgroundColor: "#ffffff" 
     }
     valueTile("lqi", "device.lqi", width: 2, height: 1, decoration: "flat", inactiveLabel: false) {
 			state "lqi", label:'Wifi ${currentValue}%', unit:""
@@ -121,7 +124,7 @@ metadata {
             state "temp", label:'${currentValue}°', unit:"F", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png", backgroundColor: "#ffffff"
         }
     main (["main"]) 
-    details(["cameraDetails", "take", "temperature", "lqi", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
+    details(["cameraDetails", "take", "temperature", "lqi", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "refresh", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
   }
 }
 
@@ -212,7 +215,7 @@ def parse(String description) {
 
     if( body.contains('value_temperature')) {
 		body = body.replaceAll("[^\\d.]", "")
-        sendEvent(name: "temperature", value: body)
+        sendEvent(name: "temperature", value: body, unit: "C")
     }
     else(body.contains('get_wifi_strength')) {
     	body = body.replaceAll("[^\\d.]", "")
