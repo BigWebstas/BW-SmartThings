@@ -107,17 +107,15 @@ metadata {
     valueTile("wifi",  "device.wifi", width: 3, height: 1, decoration: "flat"){
     	state "default", label: '${currentValue}', unit:"%"
     }
-    valueTile("temperature", "device.temperature", width: 2, height: 2, decoration: "flat") {
-            state "default", label:'${currentValue}°', unit:"F",
-                backgroundColors:[
-                    [value: 31, color: "#153591"],
-                    [value: 44, color: "#1e9cbb"],
-                    [value: 59, color: "#90d2a7"],
-                    [value: 74, color: "#44b621"],
-                    [value: 84, color: "#f1d801"],
-                    [value: 95, color: "#d04e00"],
-                    [value: 96, color: "#bc2323"]
-                ]
+        valueTile("temperature", "device.temperature", inactiveLabel: true) {
+        	state "default", label:'${currentValue}°', unit:"F",
+            backgroundColors:[
+            	[value: 77, color: "#bc2323"],
+                [value: 78, color: "#f1d801"],
+                [value: 80, color: "#44b621"],
+                [value: 82, color: "#f1d801"],
+                [value: 83, color: "#bc2323"]
+            ]
         }
     standardTile("take", "device.image", width: 2, height: 2, canChangeIcon: false, inactiveLabel: true, canChangeBackground: false) {
       state "take", label: "Take", action: "Image Capture.take", icon: "st.camera.camera", backgroundColor: "#FFFFFF", nextState:"taking"
@@ -230,6 +228,9 @@ def cmd(vars){
             HOST: "$ip:80"
         ]
     )
+    hubAction.options = options
+    log.debug hubAction
+    hubAction
 }
 
 def updateWifiTile(map) {
