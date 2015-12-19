@@ -107,15 +107,17 @@ metadata {
     valueTile("wifi",  "device.wifi", width: 3, height: 1, decoration: "flat"){
     	state "default", label: '${currentValue}', unit:"%"
     }
-        valueTile("temperature", "device.temperature", inactiveLabel: true) {
-        	state "default", label:'${currentValue}°', unit:"F",
-            backgroundColors:[
-            	[value: 77, color: "#bc2323"],
-                [value: 78, color: "#f1d801"],
-                [value: 80, color: "#44b621"],
-                [value: 82, color: "#f1d801"],
-                [value: 83, color: "#bc2323"]
-            ]
+    valueTile("temperature", "device.temperature", width: 2, height: 2, decoration: "flat") {
+            state "default", label:'${currentValue}°', unit:"F",
+                backgroundColors:[
+                    [value: 31, color: "#153591"],
+                    [value: 44, color: "#1e9cbb"],
+                    [value: 59, color: "#90d2a7"],
+                    [value: 74, color: "#44b621"],
+                    [value: 84, color: "#f1d801"],
+                    [value: 95, color: "#d04e00"],
+                    [value: 96, color: "#bc2323"]
+                ]
         }
     standardTile("take", "device.image", width: 2, height: 2, canChangeIcon: false, inactiveLabel: true, canChangeBackground: false) {
       state "take", label: "Take", action: "Image Capture.take", icon: "st.camera.camera", backgroundColor: "#FFFFFF", nextState:"taking"
@@ -202,20 +204,20 @@ def cup() {
 
 //parser
 def parse(String description) {
-    log.debug "Parsing '${description}'"
-    def map = [:]
-  def retResult = []
-  def descMap = parseDescriptionAsMap(description)
-  //Image
-  if (descMap["bucket"] && descMap["key"]) {
-    putImageInS3(descMap)
+  log.debug("Parsing '${description}'")
+
+  def map = stringToMap(description)
+
+  if (map.bucket && map.key) { //got a s3 pointer
+    putImageInS3(map)
   }
-  if (descMap["get_wifi_strength"]) {
-	updateWifiTile(descMap)
+  else{
+
+    def headerString = new String(map.headers.decodeBase64())
+    def bodyString = new String(map.body.decodeBase64())
+
+    sendEvent(name: "temperature", value: bodyString, unit: "F")
   }
-  if (descMap["value_temperature"]) {
-	updateTempTile(descMap)
-  } 
 }
 
 //camera command interpreter
@@ -228,9 +230,6 @@ def cmd(vars){
             HOST: "$ip:80"
         ]
     )
-    hubAction.options = options
-    log.debug hubAction
-    hubAction
 }
 
 def updateWifiTile(map) {
@@ -304,37 +303,11 @@ def refresh() {
 	poll()
 }
 
-//def poll() {
-//  log.debug "Executing 'poll'"
-//	def cmds = []
-//	cmds << take()
-//	cmds << cmd("value_temperature")
-//	cmds << cmd("get_wifi_strength")
-//	cmds
-//}
-def temperature() {
-	log.debug "getting temperature"
-
-  action("/?action=command&command=value_temperature", "GET", "")
-}
-
-private action(uri, type, options){
-
-  def hubAction = new physicalgraph.device.HubAction(
-    method: type,
-    path: uri,
-    headers: [HOST: "$ip:80"]
-  )
-  
-  if(options){
-    hubAction.options = options
-  }
-
-  hubAction
-}
-
-
 def poll() {
-
-	temperature()
+  log.debug "Executing 'poll'"
+	def cmds = []
+	cmds << take()
+	cmds << cmd("value_temperature")
+	cmds << cmd("get_wifi_strength")
+	cmds
 }
