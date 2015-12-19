@@ -304,11 +304,37 @@ def refresh() {
 	poll()
 }
 
+//def poll() {
+//  log.debug "Executing 'poll'"
+//	def cmds = []
+//	cmds << take()
+//	cmds << cmd("value_temperature")
+//	cmds << cmd("get_wifi_strength")
+//	cmds
+//}
+def temperature() {
+	log.debug "getting temperature"
+
+  action("/?action=command&command=value_temperature", "GET", "")
+}
+
+private action(uri, type, options){
+
+  def hubAction = new physicalgraph.device.HubAction(
+    method: type,
+    path: uri,
+    headers: [HOST: "$ip:80"]
+  )
+  
+  if(options){
+    hubAction.options = options
+  }
+
+  hubAction
+}
+
+
 def poll() {
-  log.debug "Executing 'poll'"
-	def cmds = []
-	cmds << take()
-	cmds << cmd("value_temperature")
-	cmds << cmd("get_wifi_strength")
-	cmds
+
+	temperature()
 }
