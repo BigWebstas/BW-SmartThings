@@ -7,7 +7,7 @@
 
 // for the UI
 metadata {
-  definition (name: "DSC Zone Water", author: "matt.martz@gmail.com") {
+  definition (name: "DSC Zone Water", namespace: "Alarm", author: "matt.martz@gmail.com") {
     // Change or define capabilities here as needed
     capability "Refresh"
     capability "Water Sensor"

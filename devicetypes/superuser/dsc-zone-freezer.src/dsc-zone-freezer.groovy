@@ -7,7 +7,7 @@
 
 // for the UI
 metadata {
-  definition (name: "DSC Zone Freezer", author: "matt.martz@gmail.com") {
+  definition (name: "DSC Zone Freezer", namespace: "Alarm", author: "matt.martz@gmail.com") {
     // Change or define capabilities here as needed
     capability "Refresh"
     capability "Contact Sensor"

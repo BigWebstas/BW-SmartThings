@@ -9,7 +9,7 @@
 
 // for the UI
 metadata {
-  definition (name: "DSC Zone Motion", author: "matt.martz@gmail.com") {
+  definition (name: "DSC Zone Motion", namespace: "Alarm", author: "matt.martz@gmail.com") {
     // Change or define capabilities here as needed
     capability "Refresh"
     capability "Motion Sensor"

@@ -14,7 +14,7 @@ preferences {
  
 metadata {
 	// Automatically generated. Make future change here.
-	definition (name: "Alarm Chime Toggle Button", author: "Carlos Santiago <carloss66@gmail.com>") {
+	definition (name: "Alarm Chime Toggle Button", namespace: "Alarm", author: "Carlos Santiago <carloss66@gmail.com>") {
 		capability "Switch"
 /*        capability "Refresh" */
 	}

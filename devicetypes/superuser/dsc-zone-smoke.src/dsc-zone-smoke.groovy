@@ -8,7 +8,7 @@
 
 // for the UI
 metadata {
-  definition (name: "DSC Zone Smoke", author: "matt.martz@gmail.com") {
+  definition (name: "DSC Zone Smoke", namespace: "Alarm", author: "matt.martz@gmail.com") {
     // Change or define capabilities here as needed
     capability "Refresh"
     capability "Smoke Detector"

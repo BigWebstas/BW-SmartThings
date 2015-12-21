@@ -8,7 +8,7 @@
 // for the UI
 metadata {
   // Automatically generated. Make future change here.
-  definition (name: "DSC Single Panel nomod", author: "Kent Holloway <drizit@gmail.com>") {
+  definition (name: "DSC Single Panel nomod", namespace: "Alarm", author: "Kent Holloway <drizit@gmail.com>") {
     // Change or define capabilities here as needed
     capability "Refresh"
     capability "Polling"

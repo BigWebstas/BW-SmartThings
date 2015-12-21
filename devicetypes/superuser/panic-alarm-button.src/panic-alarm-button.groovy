@@ -14,7 +14,7 @@ preferences {
  
 metadata {
 	// Automatically generated. Make future change here.
-	definition (name: "Panic Alarm Button", author: "Carlos Santiago <carloss66@gmail.com>") {
+	definition (name: "Panic Alarm Button", namespace: "Alarm", author: "Carlos Santiago <carloss66@gmail.com>") {
 		capability "Switch"
 /*        capability "Refresh" */
 	}

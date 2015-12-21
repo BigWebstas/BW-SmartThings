@@ -14,7 +14,7 @@ preferences {
  
 metadata {
 	// Automatically generated. Make future change here.
-	definition (name: "Alarm Button Away", author: "Carlos Santiago <carloss66@gmail.com>") {
+	definition (name: "Alarm Button Away", namespace: "Alarm", author: "Carlos Santiago <carloss66@gmail.com>") {
 		capability "Switch"
 /*        capability "Refresh" */
 	}

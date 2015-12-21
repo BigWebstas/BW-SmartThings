@@ -13,7 +13,7 @@ preferences {
 // for the UI
 metadata {
   // Automatically generated. Make future change here.
-  definition (name: "DSC Single Panel", author: "Kent Holloway <drizit@gmail.com>") {
+  definition (name: "DSC Single Panel", namespace: "Alarm", author: "Kent Holloway <drizit@gmail.com>") {
     // Change or define capabilities here as needed
     capability "Switch"
     capability "Refresh"

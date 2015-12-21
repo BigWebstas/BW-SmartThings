@@ -15,7 +15,7 @@ preferences {
  
 metadata {
 	// Automatically generated. Make future change here.
-	definition (name: "Alarm Control Center", author: "JTT <aesystems@gmail.com>") {
+	definition (name: "Alarm Control Center", namespace: "Alarm", author: "JTT <aesystems@gmail.com>") {
 		capability "Switch"
 		capability "polling"
 		
