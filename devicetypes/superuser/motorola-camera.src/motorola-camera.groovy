@@ -211,13 +211,11 @@ def parse(String description) {
     def header = new String(map.headers.decodeBase64())
     def body = new String(map.body.decodeBase64())
         
-//sendEvent(name: "rssi", value: body)
-
-    if( body.contains('value_temperature')) {
-		body = body.replaceAll("[^\\d.]", "")
-        sendEvent(name: "temperature", value: celsiusToFahrenheit(body.toDouble()), unit: "C")
+    if( body.contains('value_temperature')) {	 
+    	body = body.replaceAll("[^\\d.]", "")
+        converttemp(body)
     }
-    else(body.contains('get_wifi_strength')) {
+    if( body.contains('get_wifi_strength')) {
     	body = body.replaceAll("[^\\d.]", "")
         sendEvent(name: "lqi", value: body)
     }
@@ -236,6 +234,11 @@ def cmd(vars){
         ]
     )
 }
+def converttemp(cinput) {
+	cinput = celsiusToFahrenheit(cinput.toDouble())
+    sendEvent(name: "temperature", value: String.format("%.1f", cinput))
+}  
+  
 
 //Camera functionality provided by patrick@patrickstuart.com Thanks!
 //get bits from camera and proceed 
