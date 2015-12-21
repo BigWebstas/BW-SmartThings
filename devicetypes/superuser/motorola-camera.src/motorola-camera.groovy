@@ -215,7 +215,7 @@ def parse(String description) {
 
     if( body.contains('value_temperature')) {
 		body = body.replaceAll("[^\\d.]", "")
-        sendEvent(name: "temperature", value: body, unit: "C")
+        sendEvent(name: "temperature", value: celsiusToFahrenheit(body.toDouble()), unit: "C")
     }
     else(body.contains('get_wifi_strength')) {
     	body = body.replaceAll("[^\\d.]", "")
