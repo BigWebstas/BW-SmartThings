@@ -26,6 +26,7 @@ metadata {
     capability "Polling"
     capability "Temperature Measurement"
     capability "Signal Strength"
+    capability "Refresh"
 
     command "up"
     command "down"
@@ -45,7 +46,7 @@ metadata {
     command "bdown"
     command "cup"
     command "cdown"
-   
+
   }
 
   simulator {
@@ -85,7 +86,7 @@ metadata {
       state "default", label: 'meloff', action: "meloff", icon: "st.Electronics.electronics13", backgroundColor: "#ffffff" 
     }
     standardTile("reboot", "capability.momentary", width: 2, height: 1, title: "reboot", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'reboot', action: "", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'reboot', action: "reboot", icon: "", backgroundColor: "#ffffff" 
     }
     standardTile("beep", "capability.momentary", width: 2, height: 1, title: "beep", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'beeep', action: "beep", icon: "", backgroundColor: "#ffffff" 
@@ -106,7 +107,7 @@ metadata {
       state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
     }
     standardTile("refresh", "refresh", width: 2, height: 1, title: "refresh", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'refresh', action: "poll", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'refresh', action: "refresh", icon: "", backgroundColor: "#ffffff" 
     }
     valueTile("lqi", "device.lqi", width: 2, height: 1, decoration: "flat", inactiveLabel: false) {
 			state "lqi", label:'Wifi ${currentValue}%', unit:""
@@ -118,8 +119,7 @@ metadata {
       state "take", label: "Take", action: "Image Capture.take", icon: "st.camera.camera", backgroundColor: "#FFFFFF", nextState:"taking"
       state "taking", label:'Taking', action: "", icon: "st.camera.take-photo", backgroundColor: "#53a7c0"
       state "image", label: "Take", action: "Image Capture.take", icon: "st.camera.camera", backgroundColor: "#FFFFFF", nextState:"taking"
-    }
- 
+    } 
     valueTile("main", "device.temperature", width: 2, height: 2, decoration: "flat") {
             state "temp", label:'${currentValue}°', unit:"F", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png", backgroundColor: "#ffffff"
         }
@@ -234,12 +234,13 @@ def cmd(vars){
         ]
     )
 }
+
+//convert C to F
 def converttemp(cinput) {
 	cinput = celsiusToFahrenheit(cinput.toDouble())
     sendEvent(name: "temperature", value: String.format("%.1f", cinput))
 }  
   
-
 //Camera functionality provided by patrick@patrickstuart.com Thanks!
 //get bits from camera and proceed 
 def take() {
@@ -293,15 +294,18 @@ private getPictureName() {
 }
 
 def refresh() {
-	log.debug "Refreshing"
-	poll()
+  log.debug "Refreshing"
+    delayBetween([
+        cmd("value_temperature"),
+        cmd("get_wifi_strength")
+    ], 500)
 }
 
 def poll() {
   log.debug "Executing 'poll'"
-	def cmds = []
-	cmds << take()
-	cmds << cmd("value_temperature")
-	cmds << cmd("get_wifi_strength")
-	cmds
+    delayBetween([
+        cmd("value_temperature"),
+        cmd("get_wifi_strength"),
+        take()
+    ], 200)
 }
