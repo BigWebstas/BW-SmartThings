@@ -32,26 +32,34 @@ metadata {
 
   tiles (scale: 2){
     standardTile("dscpartition", "device.dscpartition", width: 6, height: 4, canChangeBackground: true, canChangeIcon: true) {
-      state "armed",     label: 'Armed',      backgroundColor: "#800000", icon:"st.Home.home3"
+      state "armed",     label: 'Armed',      backgroundColor: "#800000", icon:"st.Transportation.transportation13"
       state "exitdelay", label: 'Exit Delay', backgroundColor: "#ff9900", icon:"st.Home.home3"
       state "entrydelay",label: 'EntryDelay', backgroundColor: "#ff9900", icon:"st.Home.home3"
       state "notready",  label: 'Not Ready',  backgroundColor: "#ffcc00", icon:"st.Home.home2"
-      state "ready",     label: 'Ready',      backgroundColor: "#79b821", icon:"st.Home.home2"
+      state "ready",     label: 'Ready',      backgroundColor: "#79b821", icon:"st.Transportation.transportation12"
       state "alarm",     label: 'Alarm',      backgroundColor: "#ff0000", icon:"st.Home.home3"
     }
 
 		standardTile("disarm", "capability.momentary", width: 2, height: 2, title: "Disarm", required: true, multiple: false){
-			state "disarm", label: 'Disarm', action: "disarm", icon: "st.Home.home4", backgroundColor: "#79b821"
+			state "disarm", label: 'Disarm', action: "disarm", icon: "st.Home.home3", backgroundColor: "#79b821"
 		}
 
 		standardTile("arm", "capability.momentary", width: 2, height: 2, title: "Arm", required: true, multiple: false){
-			state "arm", label: 'Arm', action: "arm", icon: "st.Home.home4", backgroundColor: "#800000"
+			state "arm", label: 'Arm - Away', action: "arm", icon: "st.Home.home2", backgroundColor: "#800000"
        }
 		standardTile("stayarm", "capability.momentary", width: 2, height: 2, title: "Armed Stay", required: true, multiple: false){
 			state "stayarm", label: 'Arm - Stay', action: "stayarm", icon: "st.Home.home4", backgroundColor: "#008CC1"
        }
-
-		main (["dscpartition"])	
+       
+    standardTile("main", "device.dscpartition", width: 6, height: 4, canChangeBackground: true, canChangeIcon: true) {
+      state "armed",     label: 'Armed',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+      state "exitdelay", label: 'Exit Delay', backgroundColor: "#ff9900", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+      state "entrydelay",label: 'EntryDelay', backgroundColor: "#ff9900", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+      state "notready",  label: 'Not Ready',  backgroundColor: "#ffcc00", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+      state "ready",     label: 'Ready',      backgroundColor: "#79b821", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+      state "alarm",     label: 'Alarm',      backgroundColor: "#ff0000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+    }
+		main (["main"])	
 		details(["dscpartition", "arm", "stayarm", "staybutton", "disarm"])
   }
 }
