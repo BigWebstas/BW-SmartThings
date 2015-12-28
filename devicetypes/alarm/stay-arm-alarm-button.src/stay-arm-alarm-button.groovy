@@ -24,10 +24,10 @@ metadata {
 	}
 
 	// UI tile definitions
-	tiles {
-		standardTile("button", "device.switch", width: 1, height: 1, canChangeIcon: true) {
+	tiles (scale: 2){
+		standardTile("button", "device.switch", width: 6, height: 4, canChangeIcon: true) {
 			state "off", label: 'Stay', action: "switch.on", icon: "st.Home.home4", backgroundColor: "#79b821"
-			state "on", label: 'Armed', action: "switch.off", icon: "st.Home.home4", backgroundColor: "#800000"
+			//state "on", label: 'Armed', action: "switch.off", icon: "st.Home.home4", backgroundColor: "#800000"
     }
 /*        standardTile("refresh", "device.switch", inactiveLabel: false, decoration: "flat") {
             state "default", label:"", action:"refresh.refresh", icon:"st.secondary.refresh"
@@ -56,7 +56,7 @@ def on() {
     sendEvent (name: "switch", value: "on")
     return result
 }
-
+/*
 def off() {
     def result = new physicalgraph.device.HubAction(
         method: "GET",
@@ -72,7 +72,7 @@ def off() {
     return result
 }
 
-/*def refresh() {
+def refresh() {
     def result = new physicalgraph.device.HubAction(
         method: "GET",
         path: "/api/refresh",

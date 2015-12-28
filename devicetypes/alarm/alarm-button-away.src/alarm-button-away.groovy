@@ -24,10 +24,10 @@ metadata {
 	}
 
 	// UI tile definitions
-	tiles {
-		standardTile("button", "device.switch", width: 1, height: 1, canChangeIcon: true) {
-			state "off", label: 'Arm', action: "switch.on", icon: "st.Home.home2", backgroundColor: "#79b821"
-			state "on", label: 'Armed', action: "switch.off", icon: "st.Home.home2", backgroundColor: "#800000"
+	tiles (scale: 2){
+		standardTile("button", "device.switch", width: 6, height: 4, canChangeIcon: true) {
+			state "default", label: 'Away', action: "switch.on", icon: "st.Home.home2", backgroundColor: "#79b821"
+			//state "on", label: 'Armed', action: "switch.off", icon: "st.Home.home2", backgroundColor: "#800000"
     }
 /*        standardTile("refresh", "device.switch", inactiveLabel: false, decoration: "flat") {
             state "default", label:"", action:"refresh.refresh", icon:"st.secondary.refresh"
@@ -52,12 +52,12 @@ def on() {
         ]
     )
     log.debug "response" : "Request to arm received"
-    //log.debug "arm"
+    //log.debug "arm away"
     sendEvent (name: "switch", value: "on")
     return result
 }
 
-def off() {
+/*def off() {
     def result = new physicalgraph.device.HubAction(
         method: "GET",
         path: "/api/alarm/disarm",
@@ -72,7 +72,7 @@ def off() {
     return result
 }
 
-/*def refresh() {
+def refresh() {
     def result = new physicalgraph.device.HubAction(
         method: "GET",
         path: "/api/refresh",
