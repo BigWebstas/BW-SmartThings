@@ -188,7 +188,7 @@ private def initialize() {
 }
 
 private def restart() {
-    sendNotification("Pollster is toast. Restarting...")
+    //sendNotification("Pollster is toast. Restarting...")
     updated()
 }
 
