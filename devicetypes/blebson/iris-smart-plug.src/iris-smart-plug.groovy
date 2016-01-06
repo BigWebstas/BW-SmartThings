@@ -66,7 +66,7 @@ metadata {
 				attributeState "turningOff", label: '${name}', action: "switch.on", icon: "st.switches.switch.off", backgroundColor: "#ffffff", nextState: "turningOn"
 			}
 			tileAttribute ("power", key: "SECONDARY_CONTROL") {
-				attributeState "power", label:'${currentValue} W'
+				attributeState "power", label:'Consuming ${currentValue} Watts'
 			}
 		}
 

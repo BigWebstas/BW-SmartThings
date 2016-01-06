@@ -28,12 +28,15 @@ metadata {
       state "closed", label: '${name}', icon: "st.contact.contact.closed", backgroundColor: "#79b821"
       state "alarm",  label: '${name}', icon: "st.contact.contact.open",   backgroundColor: "#ff0000"
     }
+    standardTile("refresh", "device.power", inactiveLabel: false, decoration: "flat", width: 2, height: 2) {
+			state "default", label:'', action:"refresh.refresh", icon:"st.secondary.refresh"
+		}
 
     // This tile will be the tile that is displayed on the Hub page.
     main "zone"
 
     // These tiles will be displayed when clicked on the device, in the order listed here.
-    details(["zone"])
+    details(["zone", "refresh"])
   }
 }
 

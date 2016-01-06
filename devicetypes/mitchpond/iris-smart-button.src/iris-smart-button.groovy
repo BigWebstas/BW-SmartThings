@@ -47,7 +47,7 @@ metadata {
 			state "battery", label:'${currentValue}% battery', unit:""
 		}
         valueTile("temperature", "device.temperature", inactiveLabel: false, width: 2, height: 2) {
-			state "temperature", label:'${currentValue}°',
+			state "temperature", label:'${currentValue}°', 
 				backgroundColors:[
 					[value: 31, color: "#153591"],
 					[value: 44, color: "#1e9cbb"],
@@ -61,8 +61,19 @@ metadata {
         standardTile("refresh", "device.refresh", inactiveLabel: false, decoration: "flat", width: 2, height: 2) {
 			state "default", action:"refresh.refresh", icon:"st.secondary.refresh"
 		}
-
-		main (["temperature"])
+        valueTile("main", "device.temperature", inactiveLabel: false, width: 2, height: 2) {
+			state "temperature", label:'${currentValue}°', icon: "st.Home.home30",
+				backgroundColors:[
+					[value: 31, color: "#153591"],
+					[value: 44, color: "#1e9cbb"],
+					[value: 59, color: "#90d2a7"],
+					[value: 74, color: "#44b621"],
+					[value: 84, color: "#f1d801"],
+					[value: 95, color: "#d04e00"],
+					[value: 96, color: "#bc2323"]
+				]
+		}
+		main (["main"])
 		details(["button","temperature","battery","refresh"])
 	}
 }

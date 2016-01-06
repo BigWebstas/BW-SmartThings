@@ -73,13 +73,13 @@ def initialize() {
     subscribe(location, null, lanResponseHandler, [filterEvents:false])
     if(physicalMonitorInt.value[0] != "N")
     {
-    	runIn(60, checkAlarm)
+    	runIn(15, checkAlarm)
     }
 }
 
 def checkAlarm() {
 	log.debug "Check Alarm"
-    runIn(60, checkAlarm)
+    runIn(15, checkAlarm)
     //Call Alarm Server to determine status
     callAlarmServer("/api")
 }

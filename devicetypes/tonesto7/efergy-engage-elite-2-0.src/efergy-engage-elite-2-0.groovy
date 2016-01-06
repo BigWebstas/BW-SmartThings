@@ -51,15 +51,15 @@ metadata {
 	}
     
 	tiles (scale: 2) {
-        multiAttributeTile(name:"power", type:"generic", width:6, height:4, wordWrap: true) {
+        multiAttributeTile(name:"power", type:"generic", width:6, height:4, wordWrap: false) {
     		tileAttribute("device.power", key: "PRIMARY_CONTROL") {
-      			attributeState "default", label: '${currentValue} W', icon: "https://lh3.ggpht.com/v82v0R2fbKE2YQbe375WI3pnUOTyobsgqqyYN_igj8TG-wUMqvkEOObiwA4OOOSuOQc=w300", 
+      			attributeState "default", label: '${currentValue} Watts',
                 foregroundColor: "#000000",
                 backgroundColors:[
 					[value: 1, color: "#00cc00"], //Light Green
-                	[value: 2000, color: "#79b821"], //Darker Green
-                	[value: 3000, color: "#ffa81e"], //Orange
-					[value: 4000, color: "#FFF600"], //Yellow
+                	[value: 1000, color: "#79b821"], //Darker Green
+                	[value: 2000, color: "#ffa81e"], //Orange
+					[value: 3000, color: "#FFF600"], //Yellow
                     [value: 5000, color: "#fb1b42"] //Bright Red
 				]
     		}
@@ -67,6 +67,16 @@ metadata {
       				attributeState "default", label: 'Today\'s Usage: ${currentValue}'
            	}
   		}
+            valueTile("main", "device.power") {
+      			state "default", label: '${currentValue} W', icon: "https://lh3.ggpht.com/v82v0R2fbKE2YQbe375WI3pnUOTyobsgqqyYN_igj8TG-wUMqvkEOObiwA4OOOSuOQc=w300", 
+                  backgroundColors:[
+					[value: 1, color: "#00cc00"], //Light Green
+                	[value: 1000, color: "#79b821"], //Darker Green
+                	[value: 2000, color: "#ffa81e"], //Orange
+					[value: 3000, color: "#FFF600"], //Yellow
+                    [value: 5000, color: "#fb1b42"] //Bright Red
+				]
+    		}
         
         valueTile("todayUsage", "device.todayUsage", width: 3, height: 1, decoration: "flat", wordWrap: true) {
 			state "default", label: 'Today\'s Usage:\n${currentValue}'
@@ -108,7 +118,7 @@ metadata {
 			state "default", label: '${currentValue}'
 		}
         
-        main (["power"])
+        main (["main"])
         details(["power", "todayUsage", "monthUsage", "monthEst", "budgetPercentage", "tariffRate", "readingUpdated", "refresh", "hubStatus", "hubVersion", "devVer"])
 	}
 }
