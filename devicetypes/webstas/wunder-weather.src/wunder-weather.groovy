@@ -16,6 +16,7 @@ metadata {
 		capability "Relative Humidity Measurement"
 		capability "Sensor"
         capability "Illuminance Measurement"
+	    capability "Refresh"
 
 		attribute "localSunrise", "string"
 		attribute "localSunset", "string"
@@ -45,7 +46,7 @@ metadata {
 
 	tiles (scale: 2) {
 		valueTile("temperature", "device.temperature", width: 2, height: 2) {
-			state "default", label:'${currentValue}°', unit:"F",
+			state "default", label:'${currentValue}° ${unit}', unit:"F", icon: "st.Weather.weather2",
 				backgroundColors:[
 					[value: 31, color: "#153591"],
 					[value: 44, color: "#1e9cbb"],
@@ -58,7 +59,7 @@ metadata {
 		}
 
 		valueTile("humidity", "device.humidity", decoration: "flat", width: 2, height: 2) {
-			state "default", label:'${currentValue}% humidity'
+			state "default", label:'\n\n${currentValue}% humidity',  icon: "st.Weather.weather12", backgroudColors: "#abcdef"
 		}
 
 		standardTile("weatherIcon", "device.weatherIcon", decoration: "flat", width: 2, height: 2) {
@@ -152,7 +153,7 @@ metadata {
 			state "nt_partlycloudy", icon:"st.custom.wu1.nt_partlycloudy", label: "Partly Sunny"
 		}
 		valueTile("UV", "device.UV",  inactiveLabel: false, width: 2, height: 2) {
-			state "default", label:'${currentValue} ${unit}', unit:"UV", backgroundColors:[
+			state "default", label:'\n\n${currentValue} ${unit}', unit:"UV Index",  icon: "st.Weather.weather11", backgroundColors:[
 				[value: 0, color: "#44b621"],
 				[value: 2.9, color: "#ffff00"],
 				[value: 5.9, color: "#ff9900"],
@@ -169,16 +170,16 @@ metadata {
 			state "default", label:'${currentValue}'
 		}
 
-		valueTile("rise", "device.localSunrise", decoration: "flat", width: 2, height: 1) {
+		valueTile("rise", "device.localSunrise", decoration: "flat", width: 1, height: 1) {
 			state "default", label:'${currentValue}'
 		}
 
-		valueTile("set", "device.localSunset", decoration: "flat", width: 2, height: 1) {
+		valueTile("set", "device.localSunset", decoration: "flat", width: 1, height: 1) {
 			state "default", label:'${currentValue}'
 		}
 
-		valueTile("txtSun", "device.illuminance", decoration: "flat", width: 2, height: 1) {
-			state "default", label:'Sunrise Sunset'
+		valueTile("txtSun", "device.illuminance", decoration: "flat", width: 4, height: 1) {
+			state "default", label:'Sunrise ➞ ➞ Sunset ➞ ➞'
 		}
         
 		valueTile("windDir", "device.windStr", decoration: "flat", width: 5, height: 1) {
@@ -186,7 +187,7 @@ metadata {
 		}     
         
 		valueTile("precipToday", "device.precipToday", decoration: "flat", width: 2, height: 2) {
-			state "default", label:'${currentValue}" rain'
+			state "default", label:'\n\n${currentValue}" rain',  icon: "st.Weather.weather9"
 		}   
         
 		valueTile("fcastP0", "device.fcP0", decoration: "flat", width: 6, height: 2) {
@@ -213,7 +214,7 @@ metadata {
 			state "default", label:'Weather Data from \n${currentValue}'
 		} 
 		valueTile("light","device.illuminance",inactiveLabel: false, width: 2, height: 2) {
-			state "luminosity",label:'${currentValue} ${unit}', unit:"lux", backgroundColors:[
+			state "luminosity",label:'\n\n${currentValue} ${unit}', unit:"lux",  icon: "st.Weather.weather14", backgroundColors:[
 				[value: 0, color: "#000000"],
 				[value: 200, color: "#060053"],
 				[value: 1000, color: "#3E3900"],
@@ -225,7 +226,7 @@ metadata {
 		]
   }  
 		main(["main"])
-		details(["temperature", "humidity", "precipToday", "windDir", "refresh", "txtSun", "rise", "set", "UV", "light", "weatherIcon", "alert", "fcastP0", "fcastP1", "fcastP2", "fcastP3", "obTime", "obLocation"])}
+		details(["temperature", "humidity", "precipToday", "txtSun", "rise", "set", "UV", "light", "weatherIcon", "windDir", "alert", "refresh", "fcastP0", "fcastP1", "fcastP2", "fcastP3", "obTime", "obLocation"])}
 }
 
 // parse events into attributes

@@ -13,6 +13,8 @@
 *  for the specific language governing permissions and limitations under the License.
 *
 *  ---------------------------
+*	V2.4.4 (January 2nd, 2016)
+*	- Fixed code for todayUsage. Thanks @Xtropy
 *	V2.4.3 (December 18th, 2015)
 *	- Had to change MultiAttribute tile type from Thermostat to Generic to 
 *	- fix issue with latest Android Update (2.0.7)
@@ -30,8 +32,8 @@ import java.text.SimpleDateFormat
 import groovy.time.TimeCategory 
 import groovy.time.TimeDuration
 
-def devTypeVer() {"2.4.3"}
-def versionDate() {"12-18-2015"}
+def devTypeVer() {"2.4.4"}
+def versionDate() {"1-2-2016"}
 	
 metadata {
 	definition (name: "Efergy Engage Elite 2.0", namespace: "tonesto7", author: "Anthony S.") {
@@ -51,15 +53,15 @@ metadata {
 	}
     
 	tiles (scale: 2) {
-        multiAttributeTile(name:"power", type:"generic", width:6, height:4, wordWrap: false) {
+        multiAttributeTile(name:"power", type:"generic", width:6, height:4, wordWrap: true) {
     		tileAttribute("device.power", key: "PRIMARY_CONTROL") {
-      			attributeState "default", label: '${currentValue} Watts',
+      			attributeState "default", label: '${currentValue} W', 
                 foregroundColor: "#000000",
                 backgroundColors:[
 					[value: 1, color: "#00cc00"], //Light Green
-                	[value: 1000, color: "#79b821"], //Darker Green
-                	[value: 2000, color: "#ffa81e"], //Orange
-					[value: 3000, color: "#FFF600"], //Yellow
+                	[value: 2000, color: "#79b821"], //Darker Green
+                	[value: 3000, color: "#ffa81e"], //Orange
+					[value: 4000, color: "#FFF600"], //Yellow
                     [value: 5000, color: "#fb1b42"] //Bright Red
 				]
     		}
@@ -67,17 +69,22 @@ metadata {
       				attributeState "default", label: 'Today\'s Usage: ${currentValue}'
            	}
   		}
-            valueTile("main", "device.power") {
-      			state "default", label: '${currentValue} W', icon: "https://lh3.ggpht.com/v82v0R2fbKE2YQbe375WI3pnUOTyobsgqqyYN_igj8TG-wUMqvkEOObiwA4OOOSuOQc=w300", 
-                  backgroundColors:[
+        multiAttributeTile(name:"main", type:"generic", width:6, height:4, wordWrap: true) {
+    		tileAttribute("device.power", key: "PRIMARY_CONTROL") {
+      			attributeState "default", label: '${currentValue} W', icon: "https://lh3.ggpht.com/v82v0R2fbKE2YQbe375WI3pnUOTyobsgqqyYN_igj8TG-wUMqvkEOObiwA4OOOSuOQc=w300", 
+                foregroundColor: "#000000",
+                backgroundColors:[
 					[value: 1, color: "#00cc00"], //Light Green
-                	[value: 1000, color: "#79b821"], //Darker Green
-                	[value: 2000, color: "#ffa81e"], //Orange
-					[value: 3000, color: "#FFF600"], //Yellow
+                	[value: 2000, color: "#79b821"], //Darker Green
+                	[value: 3000, color: "#ffa81e"], //Orange
+					[value: 4000, color: "#FFF600"], //Yellow
                     [value: 5000, color: "#fb1b42"] //Bright Red
 				]
     		}
-        
+        	tileAttribute("todayUsage", key: "SECONDARY_CONTROL") {
+      				attributeState "default", label: 'Today\'s Usage: ${currentValue}'
+           	}
+  		}        
         valueTile("todayUsage", "device.todayUsage", width: 3, height: 1, decoration: "flat", wordWrap: true) {
 			state "default", label: 'Today\'s Usage:\n${currentValue}'
 		}

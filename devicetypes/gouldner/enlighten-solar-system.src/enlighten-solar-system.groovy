@@ -41,13 +41,13 @@ metadata {
 		// TODO: define status and reply messages here
 	}
 
-	tiles {
-            valueTile("reported_id", "device.reported_id") {
-				state ("reported_id", label: '${currentValue}\nPowered By Enphase', unit:"", backgroundColor: "#010101" 
+	tiles (scale: 2){
+            valueTile("reported_id", "device.reported_id",  decoration: "flat", width:4, height:1) {
+				state ("reported_id", label: '${currentValue}\nPowered By Enphase', unit:""
 					   //,icon:"http://edifive.com/wp-content/uploads/2015/03/icon.png"
                        )
             }
-            valueTile("energy_today", "device.energy_today") {
+            valueTile("energy_today", "device.energy_today", width:2, height:2) {
    	         state("energy_today", label: '${currentValue} KWh\nToday', icon: "http://cdn.device-icons.smartthings.com/Outdoor/outdoor3-icn@2x.png", unit:"KWh", backgroundColors: [
                     [value: 2, color: "#bc2323"],
                     [value: 5, color: "#d04e00"],
@@ -59,8 +59,8 @@ metadata {
     	            ]
             	)
         	}
-            valueTile("power", "device.power", width:2, height:1) {
-   	         state("Power", label: '${currentValue} Watts\n\nLive Generation', unit:"W", icon: "http://www.clipartsfree.net/vector/large/1302871371_Vector_Clipart.png", backgroundColor:"#bc2323",
+            valueTile("power", "device.power", width:6, height:4) {
+   	         state("Power", label: '${currentValue} Watts\n\nLive Generation', unit:"W", backgroundColor:"#bc2323",
              //foregroundColor: "#000000",
                 //backgroundColors:[
                 	//[value: 1, color: "#ffffff"], //black
@@ -85,7 +85,7 @@ metadata {
                 )
             }
       
-			valueTile("productionLevel", "device.production_level") {
+			valueTile("productionLevel", "device.production_level", width:2, height:2) {
 			 state("productionLevel", label: '${currentValue}%\nProduction', unit:"%", icon: "http://cdn.device-icons.smartthings.com/Appliances/appliances17-icn@2x.png",
               foregroundColor: "#000000",
                 backgroundColors:[
@@ -99,7 +99,7 @@ metadata {
     	            ]
             	)
 			}
-			valueTile("todayMaxProd", "device.today_max_prod_str") {
+			valueTile("todayMaxProd", "device.today_max_prod_str", width:2, height:2) {
 			 state("todayMaxProd", label: '${currentValue}%\nMax', unit:"%", icon: "http://cdn.device-icons.smartthings.com/Appliances/appliances17-icn@2x.png",
               foregroundColor: "#000000",
                 backgroundColors:[
@@ -113,7 +113,7 @@ metadata {
     	            ]
             	)                
 			}
-            valueTile("energy_life", "device.energy_life", width: 1, height: 1, canChangeIcon: true) {
+            valueTile("energy_life", "device.energy_life", canChangeIcon: true, width:2, height:2) {
    	         state("energy_life", label: '${currentValue} MWh\nLife', icon: "http://cdn.device-icons.smartthings.com/Outdoor/outdoor21-icn@2x.png", unit:"MWh",
               foregroundColor: "#000000",
                backgroundColors:[
@@ -128,13 +128,13 @@ metadata {
             	)
         	}    
 
-            standardTile("refresh", "device.energy_today",  width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
+            standardTile("refresh", "device.energy_today",  width: 4, height: 1, inactiveLabel: false, decoration: "flat") {
                 state "default", action:"polling.poll", icon:"st.secondary.refresh"
             }
 
         
         main (["powermain","energy_today"])
-        details(["power","energy_today", "energy_life", "productionLevel", "todayMaxProd", "refresh","reported_id"])
+        details(["power","energy_today", "todayMaxProd" , "productionLevel", "energy_life", "refresh","reported_id"])
 
 	}
 }
