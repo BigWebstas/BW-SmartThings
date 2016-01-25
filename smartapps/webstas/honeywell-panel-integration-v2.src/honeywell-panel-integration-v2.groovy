@@ -24,10 +24,14 @@ preferences {
   section("Zone Devices:") {
     input "zonedevices", "capability.polling", title: "Honeywell Zone Devices", multiple: true, required: false
   }
-  	section("Alarm Server Settings") {
-            input("ip", "text", title: "IP", description: "The IP of your AlarmServer", required: true)
-            input("port", "text", title: "Port", description: "The Port AlarmServer is running on", required: true)
-        }
+  section("Alarm Server Settings") {
+    input("ip", "text", title: "IP", description: "The IP of your AlarmServer", required: true)
+    input("port", "text", title: "Port", description: "The Port AlarmServer is running on", required: true)
+  }
+  section("SHM sync ") {
+  	input "syncSHM", "enum", title: "SHM<->Partiton", options: ["Yes", "No"], required: true
+  }
+
 }
 
 mappings {
@@ -49,8 +53,11 @@ def updated() {
 	initialize()
 }
 def initialize() {
-    	subscribe(location, "alarmSystemStatus", alarmStatusUpdate)
-        subscribe(paneldevices, "switch", switchUpdate)
+	log.debug "Initalizing ${settings}"
+	 if(syncSHM.value[0] != "N") {
+    	subscribe(location, "SHMstatus", SHMtoPartiton)
+        subscribe(paneldevices, "switch", PartitiontoSHM)
+    }
 }
 
 void updateZoneOrPartition() {
@@ -85,13 +92,13 @@ private update() {
       def opts = eventMap."${eventCode}"?.tokenize()
       log.debug eventCode
     if (eventCode == '650') {
-        setSmartHomeMonitor("off")
+        SetSHM("off")
       }
     if(eventCode == '701') {
-        setSmartHomeMonitor("away")
+        SetSHM("away")
       }
     if(eventCode == '652') {
-        setSmartHomeMonitor("stay")
+        SetSHM("stay")
       }
     if (opts[0])
       {
@@ -121,16 +128,16 @@ private updatePartitions(paneldevices, partitionnum, partitionstatus) {
   }
 }
 //Honeywell panel to SHM
-def switchUpdate(evt) {
+def PartitiontoSHM(evt) {
     def securityMonitorMap = [
         'stayarm':"stay",
         'disarm':"off",
         'arm':"away"
     ]
-    setSmartHomeMonitor(securityMonitorMap."${evt.value}")
+    SetSHM(securityMonitorMap."${evt.value}")
 }
 //SHM to Honeywell panel
-def alarmStatusUpdate(evt) {
+def SHMtoPartiton(evt) {
 	def eventMap = [
         'stay':"/api/alarm/stayarm",
         'off':"/api/alarm/disarm",
@@ -152,10 +159,10 @@ private callAlarmServer(path) {
         ))
 }
 //Set the SHM
-private setSmartHomeMonitor(status)
+private SetSHM(status)
 {
-	if(location.currentState("alarmSystemStatus").value != status && status != null ) {
+	if(location.currentState("SHMstatus").value != status && status != null ) {
     	log.debug "Set Smart Home Monitor to $status"
-    	sendLocationEvent(name: "alarmSystemStatus", value: status)
+    	sendLocationEvent(name: "SHMstatus", value: status)
         }
 }
