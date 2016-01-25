@@ -143,8 +143,17 @@ def shmtopartition(evt) {
         'off':"/api/alarm/disarm",
         'away':"/api/alarm/arm"
     ]
+    def securityMonitorMap = [
+        'stay':"stayarm",
+        'off':"disarm",
+        'away':"arm"
+    ]
     def path = eventMap."${evt.value}"
-	callAlarmServer(path)
+    def panelstate = securityMonitorMap."${evt.value}"
+    log.debug "${panelstate}"
+    if (paneldevices.currentState("switch".value != panelstate) && path != null){
+    	callAlarmServer(path)
+    }
     
 }
 //Send commands to EVL3/4 
