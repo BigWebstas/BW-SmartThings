@@ -1,6 +1,7 @@
 /*
  *  Honeywell alarm panel callbacks via honeyalarm server python script
- *	uses restful api
+ *	uses restful api code by Kent Holloway <drizit@gmail.com>
+ *  got the idea from phiz118 in the ST Forum
  */
 
 definition(
@@ -9,8 +10,8 @@ definition(
     author: "BigWebstas (JWebstas@gmail.com)",
     description: "Honeywell Panel Integration V2",
     category: "My Apps",
-    iconUrl: "https://dl.dropboxusercontent.com/u/2760581/dscpanel_small.png",
-    iconX2Url: "https://dl.dropboxusercontent.com/u/2760581/dscpanel_large.png",
+    iconUrl: "http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882",
+    iconX2Url: "http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882",
     oauth: true
 )
 import groovy.json.JsonBuilder
