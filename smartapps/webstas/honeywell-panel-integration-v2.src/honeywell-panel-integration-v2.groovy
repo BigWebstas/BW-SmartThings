@@ -29,7 +29,7 @@ preferences {
     input("port", "text", title: "Port", description: "The Port AlarmServer is running on", required: true)
   }
   section("SHM sync ") {
-  	input "syncshm", "enum", title: "SHM<->Partiton", options: ["Yes", "No"], required: true
+  	input "syncshm", "enum", title: "SHM<->Partiton", options: ["Y", "N"], required: true
   }
 
 }
@@ -54,7 +54,7 @@ def updated() {
 }
 def initialize() {
 	log.debug "Initalizing ${settings}"
-	 if(syncshm.value[0] != "No") {
+	 if(syncshm.value[0] != "N") {
     	subscribe(location, "alarmSystemStatus", shmtopartition)
         subscribe(paneldevices, "switch", partitiontoshm)
     }
