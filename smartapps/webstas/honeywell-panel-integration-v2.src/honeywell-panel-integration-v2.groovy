@@ -144,21 +144,25 @@ def shmtopartition(evt) {
         'away':"/api/alarm/arm"
     ]
     def securityMonitorMap = [
-        'stay':"stayarm",
-        'off':"disarm",
-        'away':"arm"
+        'stay':"armed-stay",
+        'off':"ready",
+        'away':"armed-away"
     ]
     def path = eventMap."${evt.value}"
     def panelstate = securityMonitorMap."${evt.value}"
-    log.debug "${panelstate}"
-    if (paneldevices.currentState("switch".value != panelstate) && path != null){
+    def currstate = paneldevices.currentState("switch").value
+    
+    log.debug "${panelstate}":"${currstate}"
+    if (currstate != panelstate && path != null){
+    	log.debug "States match sending command"
     	callAlarmServer(path)
     }
     
 }
 //Send commands to EVL3/4 
 private callAlarmServer(path) {
-		log.debug "${ip}:${port}${path}"
+		log.debug "Sending command to EVL"
+		log.debug "Set Panel with ${ip}:${port}${path}"
         sendHubCommand(new physicalgraph.device.HubAction(
             method: "GET",
             path: path,
