@@ -29,7 +29,7 @@ preferences {
     input("port", "text", title: "Port", description: "The Port AlarmServer is running on", required: true)
   }
   section("SHM sync ") {
-  	input "syncshm", "enum", title: "SHM<->Partiton", options: ["Y", "N"], required: true
+  	input "syncshm", "enum", title: "SHM<->Partiton", options: ["Yes", "No"], required: true
   }
 
 }
@@ -161,7 +161,7 @@ private callAlarmServer(path) {
 //Set the SHM
 private SetSHM(status)
 {
-	if(location.currentState("alarmSystemStatus").value != status && status != null ) {
+	if(location.currentState("alarmSystemStatus").value != status && status != null && syncshm.value[0] != "N") {
     	log.debug "Set Smart Home Monitor to $status"
     	sendLocationEvent(name: "alarmSystemStatus", value: status)
         }
