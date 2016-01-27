@@ -3,6 +3,9 @@
  *	uses restful api code by Kent Holloway <drizit@gmail.com>
  *  got the idea from phiz118 in the ST Forum
  *
+ *  Versioning
+ *  2.0 - Added debugging to SHM sync
+ *  
  */
 
 definition(

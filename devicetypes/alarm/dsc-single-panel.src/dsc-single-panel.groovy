@@ -3,12 +3,16 @@
  *
  *  Author: Kent Holloway <drizit@gmail.com>
  *  Date: 2014-03-20
+ *  Modified by BigWebstas
+ *	
+ *	Version
+ *	1.0 - added switch state code to help with the dup disarms
+ *	
  */
 preferences {
     input("ip", "text", title: "IP", description: "The IP of your alarmserver")
     input("port", "text", title: "Port", description: "The port")
     input("pincode", "text", title: "Pincode", description: "Alarm Pincode")
-    //input "smartMonitorInt", "enum", title: "Integrate w/ Smart Monitor?", options: ["Yes", "No"], required: true
 	} 
 // for the UI
 metadata {
