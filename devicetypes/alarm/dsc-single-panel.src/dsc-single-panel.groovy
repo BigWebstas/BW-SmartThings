@@ -32,12 +32,14 @@ metadata {
 
   tiles (scale: 2){
     standardTile("dscpartition", "device.dscpartition", width: 6, height: 4, canChangeBackground: true, canChangeIcon: true) {
-      state "armed",     label: 'Armed',      backgroundColor: "#800000", icon:"st.Transportation.transportation13"
-      state "exitdelay", label: 'Exit Delay', backgroundColor: "#ff9900", icon:"st.Home.home3"
-      state "entrydelay",label: 'EntryDelay', backgroundColor: "#ff9900", icon:"st.Home.home3"
+      state "armed-stay",     label: 'Armed Stay',      backgroundColor: "#008CC1", icon:"st.Transportation.transportation13"
+      state "armed-away",     label: 'Armed Away',      backgroundColor: "#800000", icon:"st.Transportation.transportation13"
+      state "armed-max",     label: 'Armed MAX',      backgroundColor: "#800000", icon:"st.Transportation.transportation13"
+      state "ready-bypass",     label: 'Ready Bypass',      backgroundColor: "#800000", icon:"st.Transportation.transportation12"
+      state "exit/entry-delay", label: 'Entry/Exit Delay', backgroundColor: "#ff9900", icon:"st.Home.home3"
       state "notready",  label: 'Not Ready',  backgroundColor: "#ffcc00", icon:"st.Home.home2"
       state "ready",     label: 'Ready',      backgroundColor: "#79b821", icon:"st.Transportation.transportation12"
-      state "alarm",     label: 'Alarm',      backgroundColor: "#ff0000", icon:"st.Home.home3"
+      state "alarm",     label: '!!Alarm!!',      backgroundColor: "#ff0000", icon:"st.Home.home3"
     }
 
 		standardTile("disarm", "capability.momentary", width: 2, height: 2, title: "Disarm", required: true, multiple: false){
@@ -52,12 +54,14 @@ metadata {
        }
        
     standardTile("main", "device.dscpartition", width: 6, height: 4, canChangeBackground: true, canChangeIcon: true) {
-      state "armed",     label: 'Armed',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-      state "exitdelay", label: 'Exit Delay', backgroundColor: "#ff9900", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-      state "entrydelay",label: 'EntryDelay', backgroundColor: "#ff9900", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+      state "armed-stay",     label: 'Armed Stay',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+  	  state "armed-away",     label: 'Armed Away',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+  	  state "armed-max",     label: 'Armed MAX',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+	  state "ready-bypass",     label: 'Ready Bypass',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+      state "exit/entry-delay",	label: 'Entry/Exit Delay', backgroundColor: "#ff9900", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
       state "notready",  label: 'Not Ready',  backgroundColor: "#ffcc00", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
       state "ready",     label: 'Ready',      backgroundColor: "#79b821", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-      state "alarm",     label: 'Alarm',      backgroundColor: "#ff0000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+      state "alarm",     label: '!!Alarm!!',      backgroundColor: "#ff0000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
     }
 		main (["main"])	
 		details(["dscpartition", "arm", "stayarm", "staybutton", "disarm"])
@@ -66,7 +70,6 @@ metadata {
 
 // parse events into attributes
 def parse(String description) {
-  // log.debug "Parsing '${description}'"
   def myValues = description.tokenize()
 
   log.debug "Event Parse function: ${description}"
@@ -74,17 +77,16 @@ def parse(String description) {
 }
 
 def partition(String state, String partition) {
-    // state will be a valid state for the panel (ready, notready, armed, etc)
-    // partition will be a partition number, for most users this will always be 1
-
     log.debug "Partition: ${state} for partition: ${partition}"
     sendEvent (name: "dscpartition", value: "${state}")
+    if (state != "notready") { //attempt at fixing the duplicate disarm when using the physical panel
+		sendEvent (name: "switch", value: "${state}")
+    } else { sendEvent (name: "switch", value: "ready") }
 }
 
 def refresh() {
   log.debug "Executing 'refresh' which is actually poll()"
   poll()
-  // TODO: handle 'refresh' command
 }
 def stayarm() {
     def result = new physicalgraph.device.HubAction(
@@ -92,7 +94,6 @@ def stayarm() {
         path: "/api/alarm/stayarm",
         headers: [
             HOST: "$ip:$port"
-            //HOST: getHostAddress()
         ]
     )
     log.debug "response" : "Request to stay arm received"
@@ -107,42 +108,11 @@ def arm() {
         path: "/api/alarm/arm",
         headers: [
             HOST: "$ip:$port"
-            //HOST: getHostAddress()
         ]
     )
     log.debug "response" : "Request to arm received"
     //log.debug "arm"
     sendEvent (name: "switch", value: "arm")
-    return result
-}
-
-def on() {
-    def result = new physicalgraph.device.HubAction(
-        method: "GET",
-        path: "/api/alarm/stayarm",
-        headers: [
-            HOST: "$ip:$port"
-            //HOST: getHostAddress()
-        ]
-    )
-    log.debug "response" : "Request to arm received"
-    //log.debug "stay-arm"
-    sendEvent (name: "switch", value: "on")
-    return result
-}
-
-def off() {
-    def result = new physicalgraph.device.HubAction(
-        method: "GET",
-        path: "/api/alarm/disarm",
-        headers: [
-            HOST: "$ip:$port"
-            //HOST: getHostAddress()
-        ]
-    )
-    log.debug "response" : "Request to disarm received"
-    //log.debug "disarm"
-    sendEvent (name: "switch", value: "off")
     return result
 }
 
@@ -152,7 +122,6 @@ def disarm() {
         path: "/api/alarm/disarm",
         headers: [
             HOST: "$ip:$port"
-            //HOST: getHostAddress()
         ]
     )
     log.debug "response" : "Request to disarm received"

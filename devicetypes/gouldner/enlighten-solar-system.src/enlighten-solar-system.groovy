@@ -61,14 +61,14 @@ metadata {
         	}
             valueTile("power", "device.power", width:6, height:4) {
    	         state("Power", label: '${currentValue} Watts\n\nLive Generation', unit:"W", backgroundColor:"#bc2323",
-             //foregroundColor: "#000000",
-                //backgroundColors:[
-                	//[value: 1, color: "#ffffff"], //black
-					//[value: 100, color: "#fb1b42"], //Bright Red 
-                	//[value: 700, color: "#ffa81e"], //Orange
-                	//[value: 1200, color: "#00cc00"], //Light Green
-					//[value: 2000, color: "#79b821"] //Darker Green
-					//]
+               foregroundColor: "#000000",
+                 backgroundColors:[
+                	[value: 1, color: "#ffffff"], //black
+					[value: 100, color: "#fb1b42"], //Bright Red 
+                	[value: 700, color: "#ffa81e"], //Orange
+                	[value: 1200, color: "#00cc00"], //Light Green
+					[value: 2000, color: "#79b821"] //Darker Green
+					]
                     
                 )
              }
