@@ -12,6 +12,16 @@
  * 
  * The "Take" functionality borrowed from patrick@patrickstuart.com  -  Generic Camera Device v1.0.07102014
  *  
+ *          		INSTALLATION
+ *	1. Login to the IDE https://graph.api.smartthings.com/device/list and click "New Device"
+ *	2. enter a name for your camera and label in the "Device Network Id" make sure to enter the IP as hex use this site to convert it
+ *	http://www.miniwebtool.com/ip-address-to-hex-converter/ it should look like this 0A020080 add port 80 (0050 in hex) at the end so 
+ *	your device type network id looks like this 0A020080:0050
+ *	3. Select your location and hub and then hit create
+ *	4. go into the new device on the smartthings app and open the preferences then enter the ip (not in hex form ex 192.168.0.1)
+ *	
+ *	I created this for a more indepth install http://webstas.com/index.php/smartthings-motorola-camera-faqinstall
+ *	
  */
  
 preferences {
