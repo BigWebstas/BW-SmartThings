@@ -1,7 +1,8 @@
 /*
- *  Honeywell alarm panel callbacks via honeyalarm server python script
+ *  Honeywell alarm panel callbacks via honeyalarm server python script by MattTW
  *	uses restful api code by Kent Holloway <drizit@gmail.com>
  *  got the idea from phiz118 in the ST Forum
+ *
  */
 
 definition(
@@ -154,9 +155,9 @@ def shmtopartition(evt) {
     
     log.debug "${panelstate}":"${currstate}"
     if (currstate != panelstate && path != null){
-    	log.debug "States match sending command"
+    	log.debug "States dont match!"
     	callAlarmServer(path)
-    }
+    } else { log.debug "States Match" }
     
 }
 //Send commands to EVL3/4 
