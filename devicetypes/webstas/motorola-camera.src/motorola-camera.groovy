@@ -121,7 +121,7 @@ metadata {
       state "image", label: "Take", action: "Image Capture.take", icon: "st.camera.camera", backgroundColor: "#FFFFFF", nextState:"taking"
     } 
     valueTile("main", "device.temperature", width: 2, height: 2, decoration: "flat") {
-            state "temp", label:'${currentValue}°', unit:"F", icon: "http://a2.mzstatic.com/us/r30/Purple69/v4/f2/33/c6/f233c68e-c4c5-85d1-0e10-8d7acf9664ea/icon175x175.png", backgroundColor: "#ffffff"
+            state "temp", label:'${currentValue}°', unit:"F", icon: "st.camera.camera", backgroundColor: "#ffffff"
         }
     main (["main"]) 
     details(["cameraDetails", "take", "temperature", "lqi", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "refresh", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])

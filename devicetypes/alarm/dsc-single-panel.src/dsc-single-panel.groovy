@@ -54,14 +54,14 @@ metadata {
        }
        
     standardTile("main", "device.dscpartition", width: 6, height: 4, canChangeBackground: true, canChangeIcon: true) {
-      state "armed-stay",     label: 'Armed Stay',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-  	  state "armed-away",     label: 'Armed Away',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-  	  state "armed-max",     label: 'Armed MAX',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-	  state "ready-bypass",     label: 'Ready Bypass',      backgroundColor: "#800000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-      state "exit/entry-delay",	label: 'Entry/Exit Delay', backgroundColor: "#ff9900", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-      state "notready",  label: 'Not Ready',  backgroundColor: "#ffcc00", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-      state "ready",     label: 'Ready',      backgroundColor: "#79b821", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
-      state "alarm",     label: '!!Alarm!!',      backgroundColor: "#ff0000", icon:"https://www.protex.me/wp-content/uploads/2013/12/keypad-circle.png"
+      state "armed-stay",     label: 'Armed Stay',      backgroundColor: "#800000", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
+  	  state "armed-away",     label: 'Armed Away',      backgroundColor: "#800000", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
+  	  state "armed-max",     label: 'Armed MAX',      backgroundColor: "#800000", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
+	  state "ready-bypass",     label: 'Ready Bypass',      backgroundColor: "#800000", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
+      state "exit/entry-delay",	label: 'Entry/Exit Delay', backgroundColor: "#ff9900", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
+      state "notready",  label: 'Not Ready',  backgroundColor: "#ffcc00", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
+      state "ready",     label: 'Ready',      backgroundColor: "#79b821", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
+      state "alarm",     label: '!!Alarm!!',      backgroundColor: "#ff0000", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
     }
 		main (["main"])	
 		details(["dscpartition", "arm", "stayarm", "staybutton", "disarm"])
