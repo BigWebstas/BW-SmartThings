@@ -89,25 +89,25 @@ metadata {
       state "default", label: 'reboot', action: "reboot", icon: "", backgroundColor: "#ffffff" 
     }
     standardTile("beep", "capability.momentary", width: 2, height: 1, title: "beep", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'beeep', action: "beep", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'beeep', action: "beep", icon: "st.Entertainment.entertainment2", backgroundColor: "#ffffff" 
     }
     standardTile("beepoff", "capability.momentary", width: 2, height: 1, title: "beepoff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'beep off', action: "beepoff", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'beep off', action: "beepoff", icon: "st.thermostat.heating-cooling-off", backgroundColor: "#ffffff" 
     }    
 	standardTile("bup", "capability.momentary", width: 2, height: 1, title: "bup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'Brightness -', action: "bup", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'Brightness -', action: "bup", icon: "st.custom.buttons.subtract-icon", backgroundColor: "#ffffff" 
     }
 	standardTile("bdown", "capability.momentary", width: 2, height: 1, title: "bdown", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'Brightness +', action: "bdown", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'Brightness +', action: "bdown", icon: "st.custom.buttons.add-icon", backgroundColor: "#ffffff" 
     }    
 	standardTile("cdown", "capability.momentary", width: 3, height: 1, title: "cdown", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'contrast -', action: "cdown", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'contrast -', action: "cdown", icon: "st.custom.buttons.subtract-icon", backgroundColor: "#ffffff" 
     }
 	standardTile("cup", "capability.momentary", width: 3, height: 1, title: "cup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'Contrast +', action: "cup", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'Contrast +', action: "cup", icon: "st.custom.buttons.add-icon", backgroundColor: "#ffffff" 
     }
     standardTile("refresh", "refresh", width: 2, height: 1, title: "refresh", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'refresh', action: "refresh", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'refresh', action: "refresh", icon: "st.secondary.refresh", backgroundColor: "#ffffff" 
     }
     valueTile("lqi", "device.lqi", width: 2, height: 1, decoration: "flat", inactiveLabel: false) {
 			state "lqi", label:'Wifi ${currentValue}%', unit:""
