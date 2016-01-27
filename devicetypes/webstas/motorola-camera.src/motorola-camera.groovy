@@ -92,7 +92,7 @@ metadata {
       state "default", label: 'beeep', action: "beep", icon: "st.Entertainment.entertainment2", backgroundColor: "#ffffff" 
     }
     standardTile("beepoff", "capability.momentary", width: 2, height: 1, title: "beepoff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'beep   ', action: "beepoff", icon: "st.thermostat.heating-cooling-off", backgroundColor: "#ffffff" 
+      state "default", label: 'beep Off', action: "beepoff", icon: "st.Entertainment.entertainment2", backgroundColor: "#ffffff" 
     }    
 	standardTile("bup", "capability.momentary", width: 2, height: 1, title: "bup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Brightness -', action: "bup", icon: "st.custom.buttons.subtract-icon", backgroundColor: "#ffffff" 
