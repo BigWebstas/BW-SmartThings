@@ -86,13 +86,13 @@ metadata {
       state "default", label: 'meloff', action: "meloff", icon: "st.Electronics.electronics13", backgroundColor: "#ffffff" 
     }
     standardTile("reboot", "capability.momentary", width: 2, height: 1, title: "reboot", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'reboot', action: "reboot", icon: "", backgroundColor: "#ffffff" 
+      state "default", label: 'reboot', action: "reboot", icon: "st.Office.office6", backgroundColor: "#ffffff" 
     }
     standardTile("beep", "capability.momentary", width: 2, height: 1, title: "beep", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'beeep', action: "beep", icon: "st.Entertainment.entertainment2", backgroundColor: "#ffffff" 
     }
     standardTile("beepoff", "capability.momentary", width: 2, height: 1, title: "beepoff", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'beep off', action: "beepoff", icon: "st.thermostat.heating-cooling-off", backgroundColor: "#ffffff" 
+      state "default", label: 'beep   ', action: "beepoff", icon: "st.thermostat.heating-cooling-off", backgroundColor: "#ffffff" 
     }    
 	standardTile("bup", "capability.momentary", width: 2, height: 1, title: "bup", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: 'Brightness -', action: "bup", icon: "st.custom.buttons.subtract-icon", backgroundColor: "#ffffff" 
@@ -107,7 +107,7 @@ metadata {
       state "default", label: 'Contrast +', action: "cup", icon: "st.custom.buttons.add-icon", backgroundColor: "#ffffff" 
     }
     standardTile("refresh", "refresh", width: 2, height: 1, title: "refresh", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: 'refresh', action: "refresh", icon: "st.secondary.refresh", backgroundColor: "#ffffff" 
+      state "default", label: '', action: "refresh", icon: "st.secondary.refresh", backgroundColor: "#ffffff" 
     }
     valueTile("lqi", "device.lqi", width: 2, height: 1, decoration: "flat", inactiveLabel: false) {
 			state "lqi", label:'Wifi ${currentValue}%', unit:""
