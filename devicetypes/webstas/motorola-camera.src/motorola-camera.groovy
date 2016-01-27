@@ -127,75 +127,24 @@ metadata {
     details(["cameraDetails", "take", "temperature", "lqi", "left", "right", "up", "down", "mel1", "mel2", "mel3", "mel4", "mel5", "meloff", "bup", "refresh", "bdown", "cdown", "cup", "reboot", "beep", "beepoff"])
   }
 }
-
-def left() {
-  log.debug "Executing 'left'"
-    cmd("move_left")
-}
-def right() {
-  log.debug "Executing 'right'"
-    cmd("move_right")
-}
-def up() {
-  log.debug "Executing 'up'"
-    cmd("move_backward")
-}
-def down() {
-  log.debug "Executing 'down'"
-    cmd("move_forward")
-}
-def mel1() {
-  log.debug "Executing 'melody 1'"
-    cmd("melody1")
-}
-def mel2() {
-  log.debug "Executing 'melody2'"
-    cmd("melody2")
-}
-def mel3() {
-  log.debug "Executing 'melody3'"
-    cmd("melody3")
-}
-def mel4() {
-  log.debug "Executing 'melody4'"
-    cmd("melody4")
-}
-def mel5() {
-  log.debug "Executing 'melody5'"
-    cmd("melody5")
-}
-def meloff() {
-  log.debug "Executing 'melody stop'"
-    cmd("melodystop")
-}
-def reboot() {
-  log.debug "Executing 'reboot'"
-    cmd("restart_system")
-}
-def beep() {
-  log.debug "Executing 'beep on'"
-    cmd("beeper_en&setup=1000100000000000")
-}
-def beepoff() {
-  log.debug "Executing 'Beep off'"
-    cmd("beeper_dis")
-}
-def bup() {
-  log.debug "Executing 'B+'"
-    cmd("plus_brightness")
-}
-def bdown() {
-  log.debug "Executing 'B-'"
-    cmd("minus_brightness")
-}
-def cdown() {
-  log.debug "Executing 'C-'"
-    cmd("minus_contrast")
-}
-def cup() {
-  log.debug "Executing 'C+'"
-    cmd("plus_contrast")
-}
+//commands to camera
+def left() { cmd("move_left") }
+def right() { cmd("move_right") }
+def up() { cmd("move_backward") }
+def down() { cmd("move_forward") }
+def mel1() { cmd("melody1") }
+def mel2() { cmd("melody2") }
+def mel3() { cmd("melody3") }
+def mel4() { cmd("melody4") }
+def mel5() { cmd("melody5") }
+def meloff() { cmd("melodystop") }
+def reboot() { cmd("restart_system") }
+def beep() { cmd("beeper_en&setup=1000100000000000") }
+def beepoff() { cmd("beeper_dis") }
+def bup() { cmd("plus_brightness") }
+def bdown() { cmd("minus_brightness") }
+def cdown() { cmd("minus_contrast") }
+def cup() { cmd("plus_contrast") }
 
 //parser
 def parse(String description) {
@@ -225,7 +174,7 @@ def parse(String description) {
 
 //camera command interpreter
 def cmd(vars){
-    log.debug "command recieved $vars"
+    log.debug "Executing command $vars"
         new physicalgraph.device.HubAction(
         method: "GET",
         path: "/?action=command&command=$vars",
