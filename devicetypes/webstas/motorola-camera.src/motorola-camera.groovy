@@ -26,6 +26,7 @@
  
 preferences {
     input("ip", "text", title: "IP", description: "Camera IP address", required: true, displayDuringSetup: true)
+    input("corf", "text", title: "C or F", description: "Temperature units", required: true, displayDuringSetup: true) 
     } 
     
 metadata {
@@ -196,8 +197,10 @@ def cmd(vars){
 
 //convert C to F
 def converttemp(cinput) {
+	if (corf.value[0] != "C") {
 	cinput = celsiusToFahrenheit(cinput.toDouble())
     sendEvent(name: "temperature", value: String.format("%.1f", cinput))
+	} else { sendEvent(name: "temperature", value: cinput) }
 }  
   
 //Camera functionality provided by patrick@patrickstuart.com Thanks!
