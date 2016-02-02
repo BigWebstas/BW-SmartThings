@@ -203,14 +203,16 @@ def converttemp(cinput) {
     sendEvent(name: "temperature", value: String.format("%.1f", cinput))
 	} else { sendEvent(name: "temperature", value: cinput) }
 }  
-  
-//Camera functionality provided by patrick@patrickstuart.com Thanks!
-//get bits from camera and proceed 
+
+//Determine what camera command to send based on prefs
 def take() {
 	if (model.value[0] != "66") {
 	takeimage("/cgi-bin/jpg/image.cgi")
 	} else { takeimage("/image.cgi?resolution=1280x720") }
 }
+
+//Camera functionality provided by patrick@patrickstuart.com Thanks!
+//get bits from camera and proceed 
 def takeimage(path) {
   
     def hubAction = new physicalgraph.device.HubAction(
