@@ -27,6 +27,7 @@
 preferences {
     input("ip", "text", title: "IP", description: "Camera IP address", required: true, displayDuringSetup: true)
     input("corf", "text", title: "C or F", description: "Temperature units", required: true, displayDuringSetup: true) 
+    input("model", "text", title: "Model", description: "model ex Focus 66 would be 66", required: true, displayDuringSetup: true)
     } 
     
 metadata {
@@ -206,10 +207,15 @@ def converttemp(cinput) {
 //Camera functionality provided by patrick@patrickstuart.com Thanks!
 //get bits from camera and proceed 
 def take() {
+	if (model.value[0] != "66") {
+	takeimage("/cgi-bin/jpg/image.cgi")
+	} else { takeimage("/image.cgi?resolution=1280x720") }
+}
+def takeimage(path) {
   
     def hubAction = new physicalgraph.device.HubAction(
       method: "GET",
-      path: "/cgi-bin/jpg/image.cgi",
+      path: "$path",
       headers: [
           HOST: "$ip:80"
           ]
