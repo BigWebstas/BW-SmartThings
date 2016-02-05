@@ -208,7 +208,7 @@ def converttemp(cinput) {
 def take() {
 	if (model.value[0] != "66") {
 	takeimage("/cgi-bin/jpg/image.cgi")
-	} else { takeimage("/image.cgi?resolution=1280x720") }
+	} else { takeimage("/axis-cgi/jpg/image.cgi?camera=1&resolution=320x240&compression=25") }
 }
 
 //Camera functionality provided by patrick@patrickstuart.com Thanks!
