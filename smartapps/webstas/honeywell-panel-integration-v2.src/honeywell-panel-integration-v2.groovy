@@ -35,7 +35,6 @@ preferences {
   section("SHM sync ") {
   	input "syncshm", "enum", title: "SHM<->Partiton", options: ["Yes", "No"], required: true
   }
-
 }
 
 mappings {
@@ -62,6 +61,8 @@ def initialize() {
     	subscribe(location, "alarmSystemStatus", shmtopartition)
         subscribe(paneldevices, "switch", partitiontoshm)
     }
+    log.debug "APP_ID: $app.id"
+    log.debug "ACCESS_TOKEN: $state.accessToken"
 }
 
 void updateZoneOrPartition() {
