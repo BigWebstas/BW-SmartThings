@@ -12,7 +12,7 @@
 preferences {
     input("ip", "text", title: "IP", description: "The IP of your alarmserver")
     input("port", "text", title: "Port", description: "The port")
-    input("pincode", "text", title: "Pincode", description: "Alarm Pincode")
+    //input("pincode", "text", title: "Pincode", description: "Alarm Pincode")
 	} 
 // for the UI
 metadata {
