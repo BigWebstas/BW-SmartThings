@@ -26,12 +26,17 @@ metadata {
     capability "Switch"
     capability "Refresh"
     capability "Polling"
+    capability "Alarm"
 
     // Add commands as needed
     command "partition"
     command "stayarm"
 	command "arm"
 	command "disarm"
+	command "chime"   
+    command "both"
+    command "off"
+    
   }
 
   tiles (scale: 2){
@@ -56,6 +61,9 @@ metadata {
 		standardTile("stayarm", "capability.momentary", width: 2, height: 2, title: "Armed Stay", required: true, multiple: false){
 			state "stayarm", label: 'Arm - Stay', action: "stayarm", icon: "st.Home.home4", backgroundColor: "#008CC1"
        }
+       standardTile("chime", "capability.momentary", width: 6, height: 2, title: "Chime", required: true, multiple: false, decoration: "flat"){
+			state "chime", label: 'Chime Toggle', action: "chime", icon: "st.Electronics.electronics12"
+       }
        
     standardTile("main", "device.dscpartition", width: 6, height: 4, canChangeBackground: true, canChangeIcon: true) {
       state "armed-stay",     label: 'Armed Stay',      backgroundColor: "#800000", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
@@ -68,7 +76,7 @@ metadata {
       state "alarm",     label: '!!Alarm!!',      backgroundColor: "#ff0000", icon:"http://d1unzhqf5a606m.cloudfront.net/images/large/honeywell-6150-fixed-english-alarm-keypad-with-function-buttons.jpg?1340151882"
     }
 		main (["main"])	
-		details(["dscpartition", "arm", "stayarm", "staybutton", "disarm"])
+		details(["dscpartition", "arm", "stayarm", "staybutton", "disarm", "chime"])
   }
 }
 
@@ -132,7 +140,49 @@ def disarm() {
     sendEvent (name: "switch", value: "disarm")
     return result
 }
-
+def both() {
+    def result = new physicalgraph.device.HubAction(
+        method: "GET",
+        path: "/api/alarm/panic",
+        headers: [
+            HOST: "$ip:$port"
+        ]
+    )
+    log.debug "response" : "Request set alarm in panic"
+    return result
+}    
+def off() {
+    def result = new physicalgraph.device.HubAction(
+        method: "GET",
+        path: "/api/alarm/disarm",
+        headers: [
+            HOST: "$ip:$port"
+        ]
+    )
+    log.debug "response" : "Request to disarm received"
+    //log.debug "disarm"
+    sendEvent (name: "switch", value: "disarm")
+    return result    
+}
+def chime() {
+    def result = new physicalgraph.device.HubAction(
+        method: "GET",
+        path: "/api/alarm/chime",
+        headers: [
+            HOST: "$ip:$port"
+        ]
+    )
+    log.debug "response" : "Request to toggle chime received"
+    return result
+}
 def poll() {
 	log.debug "Executing 'poll'"
+        def result = new physicalgraph.device.HubAction(
+        method: "GET",
+        path: "/api",
+        headers: [
+            HOST: "$ip:$port"
+        ]
+    )
+    return result
 }
