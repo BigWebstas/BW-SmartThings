@@ -35,7 +35,8 @@ metadata {
 	command "disarm"
 	command "chime"   
     command "both"
-    command "off"
+    command "off"   
+    command "on"
     
   }
 
@@ -91,9 +92,12 @@ def parse(String description) {
 def partition(String state, String partition) {
     log.debug "Partition: ${state} for partition: ${partition}"
     sendEvent (name: "dscpartition", value: "${state}")
-    if (state != "notready") { //attempt at fixing the duplicate disarm when using the physical panel
-		sendEvent (name: "switch", value: "${state}")
-    } else { sendEvent (name: "switch", value: "ready") }
+    if (state != "ready") {
+		sendEvent (name: "switch", value: "on")
+        log.debug "switch on"
+    } else { 
+    	sendEvent (name: "switch", value: "off")
+    	log.debug "switch off" }
 }
 
 def refresh() {
@@ -109,7 +113,7 @@ def stayarm() {
     )
     log.debug "response" : "Request to stay arm received"
     //log.debug "stayarm"
-    sendEvent (name: "switch", value: "stayarm")
+    sendEvent (name: "dscpartition", value: "stayarm")
     return result
 }
 
@@ -123,7 +127,7 @@ def arm() {
     )
     log.debug "response" : "Request to arm received"
     //log.debug "arm"
-    sendEvent (name: "switch", value: "arm")
+    sendEvent (name: "dscpartition", value: "arm")
     return result
 }
 
@@ -137,7 +141,7 @@ def disarm() {
     )
     log.debug "response" : "Request to disarm received"
     //log.debug "disarm"
-    sendEvent (name: "switch", value: "disarm")
+    sendEvent (name: "dscpartition", value: "ready")
     return result
 }
 def both() {
@@ -150,7 +154,20 @@ def both() {
     )
     log.debug "response" : "Request set alarm in panic"
     return result
-}    
+} 
+def on() {
+    def result = new physicalgraph.device.HubAction(
+        method: "GET",
+        path: "/api/alarm/stayarm",
+        headers: [
+            HOST: "$ip:$port"
+        ]
+    )
+    log.debug "response" : "Request to stayarm received"
+    //log.debug "disarm"
+    sendEvent (name: "dscpartition", value: "stayarm")
+    return result    
+}
 def off() {
     def result = new physicalgraph.device.HubAction(
         method: "GET",
@@ -161,7 +178,7 @@ def off() {
     )
     log.debug "response" : "Request to disarm received"
     //log.debug "disarm"
-    sendEvent (name: "switch", value: "disarm")
+    sendEvent (name: "dscpartition", value: "disarm")
     return result    
 }
 def chime() {
