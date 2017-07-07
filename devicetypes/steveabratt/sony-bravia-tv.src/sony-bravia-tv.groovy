@@ -40,14 +40,13 @@ metadata {
     command "sendremotecommand"
     command "digital"
     command "picoff"
-    
     command "tv_source"
     command "hdmi1"
     command "hdmi2"
     command "hdmi3"
     command "hdmi4"
     command "mute"
-    command "netflix"
+    command "Netflix"
     command "WOLC"
     command "ipaddress"
     command "iphex"
@@ -64,8 +63,8 @@ metadata {
     command "right"
     command "left"
     command "confirm"
-    command "green"
-    command "yellow"
+    command "green", "yellow"
+    //command "yellow"
     command "blue"
     command "num1"
     command "num2"
@@ -194,8 +193,8 @@ metadata {
       state "default", label:"HDMI 4", action:"hdmi4", icon:""
     }    
 
-   standardTile("netflix", "device.switch", inactiveLabel: false, height: 1, width: 1, decoration: "flat") {
-      state "default", label:"Netflix", action:"netflix", icon:""
+   standardTile("Netflix", "device.switch", inactiveLabel: false, height: 1, width: 1, decoration: "flat") {
+      state "default", label:"Netflix", action:"Netflix", icon:""
     }
     
    standardTile("home", "device.switch", inactiveLabel: false, height: 1, width: 1, decoration: "flat") {
@@ -562,12 +561,12 @@ standardTile("FootballMode", "device.switch", inactiveLabel: false, height: 1, w
 } 
 
 standardTile("Social", "device.switch", inactiveLabel: false, height: 1, width: 1, decoration: "flat") {
-   state "default", label:"Social", action:"Social", icon:""
+   state "default", label:"Social", action:"Social", icon:""f
 } 
 
-    
+    /**uncomment any extra buttons you need from the lines below*/
     main "switch"
-    details(["switch", "digital", "picoff", "tv_source", "hdmi1", "hdmi2", "hdmi3", "hdmi4", "netflix", "home", "mute", "refresh", "gguide", "epg", "favorites", "display", "options", "retu", "up", "down", "right", "left", "confirm", "green", "yellow", "blue", "num1", "num2", "num3", "num4", "num5", "num6", "num7", "num8", "num9", "num0", "num11", "num12", "volumeup", "volumedown", "ChannelUp", "ChannelDown", "SubTitle", "ClosedCaption", "Enter", "DOT", "Analog", "Teletext", "Exit", "Analog2", "AD", "Digital", "Analogg", "BS", "CS", "BSCS", "Ddata", "PicOff", "Tv_Radio", "Theater", "SEN", "InternetWidgets", "InternetVideo", "Netflix", "SceneSelect", "Mode3D", "iManual", "Audio", "Wide", "Jump", "PAP", "MyEPG", "ProgramDescription", "WriteChapter", "TrackID", "TenKey", "AppliCast", "acTVila", "DeleteVideo", "PhotoFrame", "TvPause", "KeyPad", "Media", "Forward", "Play", "Rewind", "Prev", "Stop", "Next", "Rec", "Pause", "Eject", "FlashPlus", "FlashMinus", "TopMenu", "RakurakuStart", "OneTouchTimeRec", "OneTouchView", "OneTouchRec", "OneTouchStop", "DUX", "FootballMode", "Social", "WOLC"])
+    details(["switch", "refresh", "Netflix", "home", "mute", "display", "green", "yellow", "blue", "retu", "up", "down", "right", "left", "confirm", "Forward", "Play", "Rewind", "Prev", "Stop", "Next", "Pause", "picoff", "volumeup", "volumedown", "ChannelUp", "ChannelDown"/**  "Rec", "gguide", "favorites", "epg", "options", "Eject", "digital", "tv_source", "hdmi1", "hdmi2", "hdmi3", "hdmi4", "num1", "num2", "num3", "num4", "num5", "num6", "num7", "num8", "num9", "num0", "num11", "num12", "SubTitle", "ClosedCaption", "Enter", "DOT", "Analog", "Teletext", "Exit", "Analog2", "AD", "Digital", "Analogg", "BS", "CS", "BSCS", "Ddata", "PicOff", "Tv_Radio", "Theater", "SEN", "InternetWidgets", "InternetVideo", "SceneSelect", "Mode3D", "iManual", "Audio", "Wide", "Jump", "PAP", "MyEPG", "ProgramDescription", "WriteChapter", "TrackID", "TenKey", "AppliCast", "acTVila", "DeleteVideo", "PhotoFrame", "TvPause", "KeyPad", "Media", "FlashPlus", "FlashMinus", "TopMenu", "RakurakuStart", "OneTouchTimeRec", "OneTouchView", "OneTouchRec", "OneTouchStop", "DUX", "FootballMode", "Social","WOLC"*/ ])
   }
 
 
@@ -677,6 +676,9 @@ def installed() {
 
   poll()
 }
+def bob(abc){
+	log.debug "${abc}"
+    }
 
 def on() {
   log.debug "Executing 'on'"
