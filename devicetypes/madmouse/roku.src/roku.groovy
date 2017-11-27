@@ -97,18 +97,6 @@ metadata {
            		state "default", label:'${currentValue}', icon:"https://cdn6.aptoide.com/imgs/8/9/5/8958183b67337f58bac8843e23440b3d_icon.png?w=240"
     		}   
 		}
-        
-		standardTile("homeButton", "device.homeButton",  width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
-			state "default", label:"", action:"homeButton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Oxygen480-actions-go-home.svg/200px-Oxygen480-actions-go-home.svg.png", backgroundColor:"#ffffff"
-         
-		}
-
-		standardTile("selectButton", "capability.momentary", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
-			state "default", label:"Select", action:"selectButton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Gnome-emblem-default.svg/200px-Gnome-emblem-default.svg.png"
-		}
-        standardTile("backbutton", "capability.momentary", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
-			state "default", label:"Back", action:"backbutton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Oxygen480-actions-edit-undo.svg/200px-Oxygen480-actions-edit-undo.svg.png"
-		}
 		tiles {
     		valueTile("softwareVersion", "device.softwareversion", decoration: "flat", width: 4, height: 1) {
            		state "default", label:'Version : ${currentValue}'
@@ -121,30 +109,38 @@ metadata {
             valueTile("channels", "device.channels", decoration: "flat", width: 3, height: 1) {
            		state "default", label:'${currentValue}', action:"mediaController.activities"
     		}
-                standardTile("left", "capability.momentary", width: 1, height: 1, title: "Move left", required: true, multiple: false, decoration: "flat"){
-      state "default", label: '', action: "previousButton", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Left_2.png", backgroundColor: "#ffffff"
+        }
+	standardTile("homeButton", "device.homeButton",  width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
+		state "default", label:"", action:"homeButton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Oxygen480-actions-go-home.svg/200px-Oxygen480-actions-go-home.svg.png", backgroundColor:"#ffffff"   
+	}
+	standardTile("selectButton", "capability.momentary", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
+		state "default", label:"Select", action:"selectButton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Gnome-emblem-default.svg/200px-Gnome-emblem-default.svg.png"
+	}
+    standardTile("backbutton", "capability.momentary", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
+		state "default", label:"Back", action:"backbutton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Oxygen480-actions-edit-undo.svg/200px-Oxygen480-actions-edit-undo.svg.png"
+	}	
+    standardTile("left", "capability.momentary", width: 1, height: 1, title: "Move left", required: true, multiple: false, decoration: "flat"){
+		state "default", label: '', action: "previousButton", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Left_2.png", backgroundColor: "#ffffff"
     }
     standardTile("right", "capability.momentary", width: 1, height: 1, title: "Move right", required: true, multiple: false, decoration: "flat"){
-      state "default", label: '', action: "nextButton", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Right_2.png", backgroundColor: "#ffffff"
+		state "default", label: '', action: "nextButton", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Right_2.png", backgroundColor: "#ffffff"
     }
     standardTile("up", "capability.momentary", width: 1, height: 1, title: "Move up", required: true, multiple: false, decoration: "flat"){
-      state "default", label: '', action: "up", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Top_2.png", backgroundColor: "#ffffff"
+		state "default", label: '', action: "up", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Top_2.png", backgroundColor: "#ffffff"
     }
     standardTile("down", "capability.momentary", width: 1, height: 1, title: "Move down", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: '', action: "down", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Bottom_2.png", backgroundColor: "#ffffff" 
+		state "default", label: '', action: "down", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Bottom_2.png", backgroundColor: "#ffffff" 
     }
     standardTile("volup", "capability.momentary", width: 1, height: 1, title: "Volume Up", required: true, multiple: false, decoration: "flat"){
-      state "default", label: '', action: "volup", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Oxygen480-status-audio-volume-high.svg/200px-Oxygen480-status-audio-volume-high.svg.png"
+		state "default", label: '', action: "volup", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Oxygen480-status-audio-volume-high.svg/200px-Oxygen480-status-audio-volume-high.svg.png"
     }
     standardTile("voldn", "capability.momentary", width: 1, height: 1, title: "Volume Dn", required: true, multiple: false, decoration: "flat"){
-      state "default", label: '', action: "voldn", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Oxygen480-status-audio-volume-low.svg/200px-Oxygen480-status-audio-volume-low.svg.png"
+		state "default", label: '', action: "voldn", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Oxygen480-status-audio-volume-low.svg/200px-Oxygen480-status-audio-volume-low.svg.png"
     }
     standardTile("mute", "capability.momentary", width: 1, height: 1, title: "Mute", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-      state "default", label: '', action: "mute", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Oxygen480-status-audio-volume-muted.svg/200px-Oxygen480-status-audio-volume-muted.svg.png"
+		state "default", label: '', action: "mute", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Oxygen480-status-audio-volume-muted.svg/200px-Oxygen480-status-audio-volume-muted.svg.png"
     }
 		}
-        
-
  		main "traack"
 
 		details(["main","refresh", "switch", "userdevicename","model","homeButton","softwareVersion","deviceId","selectButton","channels","backbutton","left","right","up","down", "volup", "voldn", "mute"])
@@ -459,9 +455,6 @@ def homeButton() {
     //Refresh Current Activity after 5 ish seconds 
     runIn(5, getCurrentActivity)
 }
-/*** nextButton
-	Act as if the Right Arrow button is pressed on the remote.
-***/
 def volup() {
 	rokuKeyPressAppAction("VolumeUp")
 }
@@ -488,15 +481,9 @@ def backbutton() {
 	rokuKeyPressAppAction("Back")
     runIn(5, getCurrentActivity)    
 }
-/*** previousButton
-	Act as if the Right Arrow button is pressed on the remote.
-***/
 def previousButton() {
 	rokuKeyPressAppAction("Left")
 }
-//^^^^^^^^^^^^^^ Custom Commands ^^^^^^^^^^^^^^//
-
-//-------------- Switch Commands --------------//
 def on() {
     sendEvent(name: "switch", value: "on")
     rokuKeyPressAppAction("Power")
@@ -506,9 +493,7 @@ def off() {
     sendEvent(name: "switch", value: "off")
     rokuKeyPressAppAction("PowerOff")
 }
-//^^^^^^^^^^^^^^ Switch Commands ^^^^^^^^^^^^^^//
 
-//-------------- Media Controller Commands --------------//
 /*** startActivity -> rokuLaunchAction
 	Launch the installed Application via it's Name.
     contentId = null.
