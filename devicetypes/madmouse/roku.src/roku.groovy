@@ -13,6 +13,7 @@
  *  for the specific language governing permissions and limitations under the License.
  *
  */
+
 metadata {
 	definition (name: "Roku", namespace: "madmouse", author: "Leslie Drewery") {
     	capability "Actuator"
@@ -22,6 +23,7 @@ metadata {
         capability "Media Controller"
         
 
+    
         attribute "activeAppId", "String"
         attribute "activeAppUpdated", "String"
         attribute "supportsVolume", "String"
@@ -39,6 +41,9 @@ metadata {
         command "down"
         command "play"
         command "backbutton"
+        command "volup"
+        command "voldn"
+        command "mute"
 	}
 
 	tiles(scale: 2) {
@@ -65,11 +70,16 @@ metadata {
                 state "Play Movies", label:'${currentValue}', backgroundColor:"#ff0000"
                 state "Amazon Video", label:'${currentValue}', backgroundColor:"#6600ff"
                 state "PlexPass", label:'${currentValue}', backgroundColor:"#ff0015"
+                state "Plex", label:'${currentValue}', backgroundColor:"#ff0015"
+                state "Live TV", label:'${currentValue}', backgroundColor:"#8c00ff"
             
            }
 		}
 
-
+		standardTile("switch", "device.switch", width: 2, height: 2, canChangeIcon: true) {
+			state "on", label:'${name}', action:"switch.off", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Gnome-system-shutdown.svg/200px-Gnome-system-shutdown.svg.png", backgroundColor: "#79b821"
+			state "off", label:'${name}', action:"switch.on", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Gnome-system-shutdown.svg/200px-Gnome-system-shutdown.svg.png"
+            }
 		standardTile("refresh", "device.status",  width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
 			state "default", label:"", action:"refresh.refresh", icon:"st.secondary.refresh", backgroundColor:"#ffffff"
          
@@ -84,20 +94,20 @@ metadata {
            		state "default", label:'Name : ${currentValue}'
     		}
             valueTile("traack", "device.trackDescription", decoration: "flat", width: 4, height: 1, canChangeIcon: true) {
-           		state "default", label:'${currentValue}'
+           		state "default", label:'${currentValue}', icon:"https://cdn6.aptoide.com/imgs/8/9/5/8958183b67337f58bac8843e23440b3d_icon.png?w=240"
     		}   
 		}
         
 		standardTile("homeButton", "device.homeButton",  width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
-			state "default", label:"", action:"homeButton", icon:"st.Home.home2", backgroundColor:"#ffffff"
+			state "default", label:"", action:"homeButton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Oxygen480-actions-go-home.svg/200px-Oxygen480-actions-go-home.svg.png", backgroundColor:"#ffffff"
          
 		}
 
 		standardTile("selectButton", "capability.momentary", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
-			state "default", label:"Select", action:"selectButton", backgroundColor:"#8c00ff"
+			state "default", label:"Select", action:"selectButton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Gnome-emblem-default.svg/200px-Gnome-emblem-default.svg.png"
 		}
         standardTile("backbutton", "capability.momentary", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
-			state "default", label:"Back", action:"backbutton", backgroundColor:"#8c00ff"
+			state "default", label:"Back", action:"backbutton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Oxygen480-actions-edit-undo.svg/200px-Oxygen480-actions-edit-undo.svg.png"
 		}
 		tiles {
     		valueTile("softwareVersion", "device.softwareversion", decoration: "flat", width: 4, height: 1) {
@@ -108,7 +118,7 @@ metadata {
            		state "default", label:'ID : ${currentValue}'
     		}
             
-            valueTile("channels", "device.channels", decoration: "flat", width: 4, height: 1) {
+            valueTile("channels", "device.channels", decoration: "flat", width: 3, height: 1) {
            		state "default", label:'${currentValue}', action:"mediaController.activities"
     		}
                 standardTile("left", "capability.momentary", width: 1, height: 1, title: "Move left", required: true, multiple: false, decoration: "flat"){
@@ -123,12 +133,21 @@ metadata {
     standardTile("down", "capability.momentary", width: 1, height: 1, title: "Move down", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
       state "default", label: '', action: "down", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Bottom_2.png", backgroundColor: "#ffffff" 
     }
+    standardTile("volup", "capability.momentary", width: 1, height: 1, title: "Volume Up", required: true, multiple: false, decoration: "flat"){
+      state "default", label: '', action: "volup", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Oxygen480-status-audio-volume-high.svg/200px-Oxygen480-status-audio-volume-high.svg.png"
+    }
+    standardTile("voldn", "capability.momentary", width: 1, height: 1, title: "Volume Dn", required: true, multiple: false, decoration: "flat"){
+      state "default", label: '', action: "voldn", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Oxygen480-status-audio-volume-low.svg/200px-Oxygen480-status-audio-volume-low.svg.png"
+    }
+    standardTile("mute", "capability.momentary", width: 1, height: 1, title: "Mute", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
+      state "default", label: '', action: "mute", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Oxygen480-status-audio-volume-muted.svg/200px-Oxygen480-status-audio-volume-muted.svg.png"
+    }
 		}
         
 
  		main "traack"
 
-		details(["main","refresh", "userdevicename","model","homeButton","softwareVersion","deviceId","selectButton","channels","backbutton","left","right","up","down"])
+		details(["main","refresh", "switch", "userdevicename","model","homeButton","softwareVersion","deviceId","selectButton","channels","backbutton","left","right","up","down", "volup", "voldn", "mute"])
 	}
 
 }
@@ -443,6 +462,15 @@ def homeButton() {
 /*** nextButton
 	Act as if the Right Arrow button is pressed on the remote.
 ***/
+def volup() {
+	rokuKeyPressAppAction("VolumeUp")
+}
+def voldn() {
+	rokuKeyPressAppAction("VolumeDown")
+}  
+def mute() {
+	rokuKeyPressAppAction("VolumeMute")
+}  
 def nextButton() {
 	rokuKeyPressAppAction("Right")
 }
@@ -471,10 +499,12 @@ def previousButton() {
 //-------------- Switch Commands --------------//
 def on() {
     sendEvent(name: "switch", value: "on")
+    rokuKeyPressAppAction("Power")
 }
 
 def off() {
     sendEvent(name: "switch", value: "off")
+    rokuKeyPressAppAction("PowerOff")
 }
 //^^^^^^^^^^^^^^ Switch Commands ^^^^^^^^^^^^^^//
 

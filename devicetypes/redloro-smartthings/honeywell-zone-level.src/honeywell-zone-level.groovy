@@ -14,7 +14,6 @@
  */
 metadata {
   definition (name: "Honeywell Zone Level", namespace: "redloro-smartthings", author: "redloro@gmail.com") {
-    capability "Contact Sensor"
     capability "Sensor"
 
     command "zone"
@@ -23,9 +22,10 @@ metadata {
   tiles(scale: 2) {
     multiAttributeTile(name:"zone", type: "generic", width: 6, height: 4){
       tileAttribute ("device.contact", key: "PRIMARY_CONTROL") {
-        attributeState "Full", label:'${name}', icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/Full.png", backgroundColor:"#79b821"
-        attributeState "Low", label:'${name}', icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/empty.png", backgroundColor:"#ffa81e"
-        attributeState "Low", label:'${name}', icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/empty.png", backgroundColor:"#ff0000"
+        attributeState "closed", label:'Full', icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/Full.png", backgroundColor:"#79b821"
+        attributeState "open", label:'Low', icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/empty.png", backgroundColor:"#ffa81e"
+        attributeState "check", label:'Low}', icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/empty.png", backgroundColor:"#ff0000"
+        attributeState "alarm", label:'Low}', icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/empty.png", backgroundColor:"#ff0000"
       }
     }
 
@@ -39,7 +39,8 @@ def zone(String state) {
   def descMap = [
     'closed':"Is Full",
     'open':"Is Low",
-    'alarm':"Is Low"
+    'alarm':"Is Low",
+    'check':"Is Low"
   ]
   def desc = descMap."${state}"
 
