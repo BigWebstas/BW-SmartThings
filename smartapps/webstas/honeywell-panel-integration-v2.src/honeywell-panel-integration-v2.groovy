@@ -44,22 +44,20 @@ mappings {
     ]
   }
 }
-
 def installed() {
-	initialize()
+initialize()
 }
 
 def updated() {
-  log.debug "Updated!"
-  	unsubscribe()
-    unschedule()
-	initialize()
+log.debug "Updated!"
+initialize()
 }
+
 def initialize() {
 	log.debug "Initalizing ${settings}"
 	 if(syncshm.value[0] != "N") {
     	subscribe(location, "alarmSystemStatus", shmtopartition)
-        subscribe(paneldevices, "switch", partitiontoshm)
+        subscribe(paneldevices, "dscpartition", partitiontoshm)
     }
     log.debug "APP_ID: $app.id"
     log.debug "ACCESS_TOKEN: $state.accessToken"
@@ -96,15 +94,6 @@ private update() {
       //lookup event and send SHM command if needed
       def opts = eventMap."${eventCode}"?.tokenize()
       log.debug eventCode
-    if (eventCode == '650') {
-        SetSHM("off")
-      }
-    if(eventCode == '701') {
-        SetSHM("away")
-      }
-    if(eventCode == '652') {
-        SetSHM("stay")
-      }
     if (opts[0])
       {
         if ("${opts[0]}" == 'zone') {
@@ -135,9 +124,12 @@ private updatePartitions(paneldevices, partitionnum, partitionstatus) {
 //Honeywell panel to SHM
 def partitiontoshm(evt) {
     def securityMonitorMap = [
-        'stayarm':"stay",
-        'disarm':"off",
-        'arm':"away"
+        'armed-stay':"stay",
+        'exit/entry-delay':"off",
+        'armed-away':"away",
+        'ready':"off",
+        'notready':"off",
+        'ready-bypass':"off"
     ]
     SetSHM(securityMonitorMap."${evt.value}")
 }
@@ -155,7 +147,7 @@ def shmtopartition(evt) {
     ]
     def path = eventMap."${evt.value}"
     def panelstate = securityMonitorMap."${evt.value}"
-    def currstate = paneldevices.currentState("switch").value
+    def currstate = paneldevices.currentState("dscpartition").value
     
     log.debug "${panelstate}":"${currstate}"
     if (currstate != panelstate && path != null){
