@@ -23,9 +23,9 @@ definition(
     description: "Manage Roku Devices ",
     singleInstance: true,
     category: "SmartThings Labs",
-    iconUrl: "https://i1.wp.com/pivotce.com/files/2015/12/roku_square_logo.png",
-    iconX2Url: "https://i1.wp.com/pivotce.com/files/2015/12/roku_square_logo.png",
-    iconX3Url: "https://i1.wp.com/pivotce.com/files/2015/12/roku_square_logo.png")
+    iconUrl: "https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/RokuLogo.png",
+    iconX2Url: "https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/RokuLogo.png",
+    iconX3Url: "https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/RokuLogo.png")
 
 def urnPlayerLink = "urn:roku-com:device:player:1"
 
