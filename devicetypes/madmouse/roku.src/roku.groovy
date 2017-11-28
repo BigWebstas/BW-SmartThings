@@ -13,6 +13,10 @@
  *  for the specific language governing permissions and limitations under the License.
  *	
  *	Ver 1.0 - added volume, power, direction arrows, and alt icons
+ *
+ *
+ *  Gnome Icons used under GPL 3.0 Licence
+ *  https://www.gnu.org/licenses/gpl-3.0.en.html
  */
 
 metadata {
@@ -78,8 +82,8 @@ metadata {
 		}
 
 		standardTile("switch", "device.switch", width: 2, height: 2, canChangeIcon: true) {
-			state "on", label:'${name}', action:"switch.off", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Gnome-system-shutdown.svg/200px-Gnome-system-shutdown.svg.png", backgroundColor: "#79b821"
-			state "off", label:'${name}', action:"switch.on", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Gnome-system-shutdown.svg/200px-Gnome-system-shutdown.svg.png"
+			state "on", label:'${name}', action:"switch.off", icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/200px-Gnome-system-shutdown.svg.png", backgroundColor: "#79b821"
+			state "off", label:'${name}', action:"switch.on", icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/200px-Gnome-system-shutdown.svg.png"
             }
 		standardTile("refresh", "device.status",  width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
 			state "default", label:"", action:"refresh.refresh", icon:"st.secondary.refresh", backgroundColor:"#ffffff"
@@ -112,13 +116,13 @@ metadata {
     		}
         }
 	standardTile("homeButton", "device.homeButton",  width: 2, height: 2, inactiveLabel: false, decoration: "flat") {
-		state "default", label:"", action:"homeButton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Oxygen480-actions-go-home.svg/200px-Oxygen480-actions-go-home.svg.png", backgroundColor:"#ffffff"   
+		state "default", label:"", action:"homeButton", icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/200px-Oxygen480-actions-go-home.svg.png", backgroundColor:"#ffffff"   
 	}
 	standardTile("selectButton", "capability.momentary", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
-		state "default", label:"Select", action:"selectButton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Gnome-emblem-default.svg/200px-Gnome-emblem-default.svg.png"
+		state "default", label:"Select", action:"selectButton", icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/200px-Gnome-emblem-default.svg.png"
 	}
     standardTile("backbutton", "capability.momentary", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
-		state "default", label:"Back", action:"backbutton", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Oxygen480-actions-edit-undo.svg/200px-Oxygen480-actions-edit-undo.svg.png"
+		state "default", label:"Back", action:"backbutton", icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/200px-Oxygen480-actions-edit-undo.svg.png"
 	}	
     standardTile("left", "capability.momentary", width: 1, height: 1, title: "Move left", required: true, multiple: false, decoration: "flat"){
 		state "default", label: '', action: "previousButton", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Left_2.png", backgroundColor: "#ffffff"
@@ -133,13 +137,13 @@ metadata {
 		state "default", label: '', action: "down", icon: "http://dangerzone.biz/wp-content/uploads/2015/12/Bottom_2.png", backgroundColor: "#ffffff" 
     }
     standardTile("volup", "capability.momentary", width: 1, height: 1, title: "Volume Up", required: true, multiple: false, decoration: "flat"){
-		state "default", label: '', action: "volup", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Oxygen480-status-audio-volume-high.svg/200px-Oxygen480-status-audio-volume-high.svg.png"
+		state "default", label: '', action: "volup", icon: "https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/200px-Oxygen480-status-audio-volume-high.svg.png"
     }
     standardTile("voldn", "capability.momentary", width: 1, height: 1, title: "Volume Dn", required: true, multiple: false, decoration: "flat"){
-		state "default", label: '', action: "voldn", icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Oxygen480-status-audio-volume-low.svg/200px-Oxygen480-status-audio-volume-low.svg.png"
+		state "default", label: '', action: "voldn", icon: "https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/200px-Oxygen480-status-audio-volume-low.svg.png"
     }
     standardTile("mute", "capability.momentary", width: 1, height: 1, title: "Mute", inactiveLabel: true, canChangeBackground: false, decoration: "flat"){
-		state "default", label: '', action: "mute", icon:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Oxygen480-status-audio-volume-muted.svg/200px-Oxygen480-status-audio-volume-muted.svg.png"
+		state "default", label: '', action: "mute", icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/200px-Oxygen480-status-audio-volume-muted.svg.png"
     }
 		}
  		main "traack"
