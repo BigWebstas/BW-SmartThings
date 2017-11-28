@@ -11,7 +11,10 @@
  *  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed
  *  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
  *  for the specific language governing permissions and limitations under the License.
- *
+ * 
+ *  Updated by BWebstas
+ *  
+ *  Version 1.1
  */
 definition(
     name: "Roku (Connect)",
@@ -65,10 +68,14 @@ def deviceDiscovery() {
     }
 
 	return dynamicPage(name: "deviceDiscovery", title: "Discovery Started!", nextPage: "", refreshInterval: 5, install: true, uninstall: true) {
-		section("Please wait while we discover your Roku Devices. Discovery can take five minutes or more, so sit back and relax! Select your device below once discovered.") {
-			input "selectedDevices", "enum", required: false, title: "Select Devices (${options.size() ?: 0} found)", multiple: true, options: options
-		}
+            section("Roku Information") {    
+            input "deviceName", "text", required: true, title: "Roku Device Name"
+            }
+		section("Selected Roku") {
+			input "selectedDevices", "enum", required: true, title: "Select Roku (${options.size() ?: 0} found)", multiple: false, options: options
+            }
 	}
+    log.debug "Device name is $deviceName"
 }
 
 def installed() {
@@ -167,8 +174,8 @@ def addDevices() {
 
 		if (!d) {
 			log.debug "Creating Roku Device with dni: ${selectedDevice.value} - ${selectedDevice.value.networkAddress} : ${selectedDevice.value.deviceAddress}"
-			addChildDevice("madmouse", "Roku", selectedDevice.value.mac, selectedDevice?.value.hub, [
-				"label": selectedDevice?.value?.name ?: "Roku - ${selectedDevice.value.mac}",
+			addChildDevice("madmouse", "Roku", selectedDevice.value.networkAddress, selectedDevice?.value.hub, [
+				"label": selectedDevice?.value?.name ?: $deviceName,
 				"data": [
 					"mac": selectedDevice.value.mac,
 					"ip": selectedDevice.value.networkAddress,
