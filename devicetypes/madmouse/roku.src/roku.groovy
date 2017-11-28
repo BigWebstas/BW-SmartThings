@@ -95,7 +95,7 @@ metadata {
            		state "default", label:'Name : ${currentValue}'
     		}
             valueTile("traack", "device.trackDescription", decoration: "flat", width: 4, height: 1, canChangeIcon: true) {
-           		state "default", label:'${currentValue}', icon:"https://cdn6.aptoide.com/imgs/8/9/5/8958183b67337f58bac8843e23440b3d_icon.png?w=240"
+           		state "default", label:'${currentValue}', icon:"https://raw.githubusercontent.com/Webstas/BW-SmartThings/master/assets/RokuLogo.png"
     		}   
 		}
 		tiles {
