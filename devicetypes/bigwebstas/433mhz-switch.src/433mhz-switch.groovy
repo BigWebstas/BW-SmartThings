@@ -12,10 +12,10 @@
  *
  */
 preferences {
-    input("ip", "text", title: "IP", description: "The IP of your alarmserver")
-    input("port", "text", title: "Port", description: "The port")
-    input("user", "text", title: "user", description: "The IP of your alarmserver")
-    input("pass", "text", title: "pass", description: "The IP of your alarmserver")
+    input("ip", "text", title: "IP", description: "IPv4 Address")
+    input("port", "text", title: "Port", description: "Port")
+    input("user", "text", title: "user", description: "User Name")
+    input("pass", "text", title: "pass", description: "Password")
    	} 
 
 metadata {
@@ -23,7 +23,7 @@ metadata {
   	definition (name: "433mhz switch", namespace: "BigWebstas", author: "BigWebstas") {
 
     capability "Switch"
-  //  capability "Refresh"
+   // capability "Refresh"
    // capability "Polling"
     capability "Momentary"
 
@@ -36,13 +36,13 @@ metadata {
   	tiles {
     		 
 		standardTile("down", "device.switch", inactiveLabel: false, decoration: "flat") {
-			state "default", label:'Down', action:"on", icon:"https://github.com/Webstas/BW-SmartThings/blob/master/assets/down.png?raw=true"
+			state "default", label:'Down', action:"on", icon:"https://github.com/BigWebstas/BW-SmartThings/blob/master/assets/down.png?raw=true"
 		}  
         standardTile("up", "device.switch", inactiveLabel: false, decoration: "flat") {
-			state "default", label:'Up', action:"off", icon:"https://github.com/Webstas/BW-SmartThings/blob/master/assets/up.png?raw=true"
+			state "default", label:'Up', action:"off", icon:"https://github.com/BigWebstas/BW-SmartThings/blob/master/assets/up.png?raw=true"
 		} 
         standardTile("stop", "device.button", inactiveLabel: false, decoration: "flat") {
-			state "default", label:'stop', action:"momentary.push", icon:"https://github.com/Webstas/BW-SmartThings/blob/master/assets/stop.png?raw=true"
+			state "default", label:'stop', action:"momentary.push", icon:"https://github.com/BigWebstas/BW-SmartThings/blob/master/assets/stop.png?raw=true"
 		}
         valueTile("status", "device.switch", ) {
             state "val", label:'${currentValue}', defaultState: true, icon:"st.Electronics.electronics18"
